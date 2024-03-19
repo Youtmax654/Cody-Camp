@@ -9,9 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-linear-purple":
+          "linear-gradient(to right, #5e1d76, #7d3796, #9d51b8, #bf6cdb, #e188ff)",
+      },
+      colors: {
+        "black-100": "#18181B",
+        purple: "#5E1D76",
+        white: "#fafafa",
+      },
+      boxShadow: {
+        md: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       },
     },
   },
