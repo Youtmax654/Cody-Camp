@@ -16,6 +16,8 @@ const config: Config = {
         "black-100": "#18181B",
         purple: "#5E1D76",
         white: "#fafafa",
+        salmon: "#fa7268",
+        indianred: "#ef5f67"
       },
       boxShadow: {
         md: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
