@@ -8,16 +8,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      transitionProperty: {
+        width: "width",
+      },
       backgroundImage: {
-        "gradient-linear-purple":
-          "linear-gradient(to right, #5e1d76, #7d3796, #9d51b8, #bf6cdb, #e188ff)",
+        "gradient-pink":
+          "linear-gradient(90deg, rgba(198,35,104,1) 0%, rgba(250,114,104,1) 100%)",
+        wave: "background: url(../public/layered-waves-haikei.svg); background-repeat: no-repeat; background-size: cover; background-position: 75% 0;",
       },
       colors: {
         "black-100": "#18181B",
         purple: "#5E1D76",
+        "purple-500": "#471557",
+        "purple-200": "#7D3796",
         white: "#fafafa",
+        lavender: "#D8D8F6",
+        night: "#151414",
+        mediumslateblue: "#685CFE",
         salmon: "#fa7268",
-        indianred: "#ef5f67"
+        indianred: "#EF5F67",
       },
       boxShadow: {
         md: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",

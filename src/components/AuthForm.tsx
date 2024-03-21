@@ -29,7 +29,7 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const [formState, setFormState] = useState("neutre");
+  const [formState, setFormState] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [accountExist, setAccountExist] = useState(false);
 
@@ -59,13 +59,14 @@ const LoginForm = () => {
     }
 
     switch (formState) {
-      case "inscription":
-        alert("inscription");
-        // TO DO: Inscription
+      case "signup":
+        alert("signup");
+        // TO DO: signup
         break;
-      case "connexion":
+      case "signin":
         const password = target.password.value;
         if (passwords[usersMails.indexOf(email)] === password) {
+          window.localStorage.setItem("uid", "1");
           router.push("/home");
         }
         break;
@@ -79,7 +80,7 @@ const LoginForm = () => {
   };
 
   const handleReturn = () => {
-    setFormState("neutre");
+    setFormState("");
     setEmailIsValid(false);
   };
 
@@ -101,9 +102,9 @@ const LoginForm = () => {
 
   const getTitleText = () => {
     switch (formState) {
-      case "connexion":
+      case "signin":
         return "Bon retour parmis nous !";
-      case "inscription":
+      case "signup":
         return "Créer un compte";
       default:
         return "Bienvenue sur Cody Camp";
@@ -112,9 +113,9 @@ const LoginForm = () => {
 
   const getSubtitleText = () => {
     switch (formState) {
-      case "connexion":
+      case "signin":
         return "Entrez votre mot de passe pour vous connecter";
-      case "inscription":
+      case "signup":
         return "Entrez votre mot de passe et confirmez-le pour vous inscrire";
       default:
         return "Entrez votre adresse e-mail (de l'école) pour continuer";
@@ -123,18 +124,18 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (emailIsValid) {
-      setFormState(accountExist ? "connexion" : "inscription");
+      setFormState(accountExist ? "signin" : "signup");
     } else {
-      setFormState("neutre");
+      setFormState("");
     }
   }, [emailIsValid, accountExist]);
 
   return (
     <div className="relative flex flex-col items-center justify-center gap-6">
-      {formState !== "neutre" && (
+      {formState !== "" && (
         <IoMdArrowRoundBack
-          className="absolute -left-10 -top-20 cursor-pointer text-3xl"
-          color="#5E1D76"
+          className="absolute -top-20 left-0 cursor-pointer text-3xl md:-left-10"
+          color="#fa7268"
           onClick={handleReturn}
         />
       )}
@@ -155,16 +156,16 @@ const LoginForm = () => {
           accountExist ? (
             <>
               <RenderPasswordField />
-              <Button value="Se connecter" className="mt-3" />
+              <Button value="Se connecter" type="submit" className="mt-3" />
             </>
           ) : (
             <>
               <RenderRegistrationFields />
-              <Button value="S'inscrire" className="mt-3" />
+              <Button value="S'inscrire" type="submit" className="mt-3" />
             </>
           )
         ) : (
-          <Button value="Continuer" className="mt-3" />
+          <Button value="Continuer" type="submit" className="mt-3" />
         )}
       </form>
     </div>

@@ -6,10 +6,16 @@ type Props = {
   onClick?: () => void;
 };
 
-const Button: React.FC<Props> = ({ value, className, disabled, type, onClick, }) => {
+const Button: React.FC<Props> = ({
+  value,
+  className,
+  disabled,
+  type,
+  onClick,
+}) => {
   return (
     <button
-      className={`rounded-md bg-purple p-1 text-white shadow-md outline-none hover:bg-purple/90 ${className}`}
+      className={`bg-salmon hover:bg-indianred rounded-md p-1 text-white shadow-md outline-none transition-colors duration-150 before:bg-black ${className}`}
       disabled={disabled}
       type={type || "button"}
       onClick={onClick}

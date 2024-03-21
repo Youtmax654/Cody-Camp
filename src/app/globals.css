@@ -8,20 +8,35 @@
   --fc-button-bg-color: #fa7268;
   --fc-button-hover-bg-color: #ef5f67;
   --fc-button-active-bg-color: #ef5f67;
-  --fc-border-color:black;  
+  --fc-border-color: black;
 }
 
 body {
   width: 100%;
   height: 100vh;
-  background: #fafafa;
+  background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  main.wave {
+    background: url(../public/layered-waves-haikei.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 75% 0;
+    justify-content: end;
+  }
+}
+
+.fc-media-screen {
+  width: 100%;
+  height: 80%;
 }
 
 .fc-col-header-cell {
   @apply bg-gray-300;
 }
 
-.fc-toolbar-title{
+.fc-toolbar-title {
   border-radius: 25px;
   border: 2px solid #000000;
   padding: 20px;
@@ -41,9 +56,8 @@ body {
   color: #000000 !important;
 }
 
-.fc-view-harness.fc-view-harness-active{
-  height: 40vw !important;
-  width: 95vw;
+.fc-view-harness.fc-view-harness-active {
+  width: 100%;
 }
 
 .popup-container {
@@ -89,4 +103,58 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 2.5em;
+  height: 1.5em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #d4acfb;
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1em;
+  width: 1em;
+  left: 0.3em;
+  bottom: 0.25em;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.switch input:checked + .slider {
+  background: #b84fce;
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #b84fce;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1em);
+  width: 1.5em;
+  height: 1.5em;
+  bottom: 0;
 }
