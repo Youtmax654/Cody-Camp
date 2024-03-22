@@ -24,9 +24,9 @@ const Input: React.FC<Props> = ({
         id={label}
         placeholder={placeholder}
         disabled={disabled}
-        className={`rounded-md border 
-                  border-solid border-gray-300
-                  bg-white 
+        className={`bg-white-100 rounded-md 
+                  border border-solid
+                  border-gray-300 
                   p-2 shadow-md outline-1 
                   focus:outline-gray-400 
                   disabled:cursor-not-allowed

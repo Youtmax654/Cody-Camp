@@ -68,26 +68,26 @@ function Planning() {
               <label>Nom du cours:</label>
               <input
                 type="text"
-                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:!outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:!outline-indianred"
               />
               <label>Date de début:</label>
               <input
                 type="datetime-local"
-                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:outline-indianred"
               />
               <label>Date de fin:</label>
               <input
                 type="datetime-local"
-                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:outline-indianred"
               />
               <button
-                className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
                 type="submit"
               >
                 Ajouter
               </button>
               <button
-                className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
                 onClick={() => setIsPopupOpen(false)}
               >
                 Annuler
@@ -110,7 +110,7 @@ function Planning() {
         />
         <button
           onClick={handleClick}
-          className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+          className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
         >
           Ajouter Cours
         </button>
