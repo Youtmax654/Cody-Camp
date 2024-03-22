@@ -131,10 +131,10 @@ const LoginForm = () => {
   }, [emailIsValid, accountExist]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center gap-6">
+    <div className="relative flex flex-col items-center justify-center gap-6 rounded-xl bg-white p-4">
       {formState !== "" && (
         <IoMdArrowRoundBack
-          className="absolute -top-20 left-0 cursor-pointer text-3xl md:-left-10"
+          className="absolute left-3 top-4 cursor-pointer text-3xl md:-left-10 md:-top-20"
           color="#fa7268"
           onClick={handleReturn}
         />

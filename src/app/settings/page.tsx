@@ -27,7 +27,7 @@ function Settings() {
 
   return (
     <div className="flex w-full flex-col">
-      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20">
+      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4">
         {tabs.map((tab) => (
           <button
             key={tab}

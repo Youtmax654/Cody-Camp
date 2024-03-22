@@ -23,9 +23,9 @@ const PersonalInformation = () => {
           <div className="flex flex-col justify-center gap-2">
             <label htmlFor="ppInput">
               <div
-                className="cursor-pointer rounded-md border 
-                              border-solid border-black/20 
-                              bg-white p-2 font-bold shadow-md 
+                className="bg-white-100 cursor-pointer rounded-md 
+                              border border-solid 
+                              border-black/20 p-2 font-bold shadow-md 
                               transition-colors hover:bg-black/5"
               >
                 Changer la photo de profil

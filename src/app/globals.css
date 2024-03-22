@@ -17,6 +17,12 @@ body {
   background: #ffffff;
 }
 
+main.wave {
+  background: url(../public/blurry-gradient-haikei.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @media (min-width: 768px) {
   main.wave {
     background: url(../public/layered-waves-haikei.svg);
@@ -74,7 +80,7 @@ body {
 }
 
 .popup {
-  background-color: white;
+  background-color: white-100;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
