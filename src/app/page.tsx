@@ -1,12 +1,13 @@
-import LoginForm from "@/components/LoginForm";
+"use client";
+
+import AuthForm from "@/components/AuthForm";
 
 export default function Home() {
   return (
-    <div className="flex h-full flex-row">
-      <section className="flex h-full w-1/2 items-center justify-center bg-purple"></section>
-      <section className="flex h-full w-1/2 items-center justify-center">
-        <LoginForm />
+    <main className="wave flex h-full flex-row justify-center bg-white">
+      <section className="flex w-1/2 items-center justify-center">
+        <AuthForm />
       </section>
-    </div>
+    </main>
   );
 }

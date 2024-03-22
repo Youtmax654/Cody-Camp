@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import { useEffect, useState } from "react";
 
 function Planning() {
   interface CustomEventInfo {
@@ -28,14 +28,14 @@ function Planning() {
   useEffect(() => {
     // Verrouiller le défilement du corps lorsque la popup est ouverte
     if (isPopupOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
 
     // Nettoyer le style lors du démontage du composant
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isPopupOpen]);
 
@@ -59,25 +59,44 @@ function Planning() {
   ];
 
   return (
-    <div>
+    <>
       {isPopupOpen && (
         <div className="popup-container">
           <div className="popup">
             <h2>Ajouter un cours</h2>
             <form>
               <label>Nom du cours:</label>
-              <input type="text" className='rounded-md bg-white border-salmon border border-solid p-1.5 active:!outline-indianred'/>
+              <input
+                type="text"
+                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:!outline-indianred"
+              />
               <label>Date de début:</label>
-              <input type="datetime-local" className='rounded-md bg-white border-salmon border border-solid p-1.5 active:outline-indianred' />
+              <input
+                type="datetime-local"
+                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:outline-indianred"
+              />
               <label>Date de fin:</label>
-              <input type="datetime-local" className='rounded-md bg-white border-salmon border border-solid p-1.5 active:outline-indianred' />
-              <button className='rounded-md bg-salmon text-white shadow-md outline-none hover:bg-indianred border-black border border-solid p-1.5' type="submit">Ajouter</button>
-              <button className='rounded-md bg-salmon text-white shadow-md outline-none hover:bg-indianred border-black border border-solid p-1.5' onClick={() => setIsPopupOpen(false)}>Annuler</button>
+              <input
+                type="datetime-local"
+                className="rounded-md border border-solid border-salmon bg-white p-1.5 active:outline-indianred"
+              />
+              <button
+                className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+                type="submit"
+              >
+                Ajouter
+              </button>
+              <button
+                className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+                onClick={() => setIsPopupOpen(false)}
+              >
+                Annuler
+              </button>
             </form>
           </div>
         </div>
       )}
-      <div className="p-10 flex justify-center items-center flex-col gap-6">
+      <div className="flex flex-1 flex-col items-center justify-center gap-6 p-10">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView={"dayGridMonth"}
@@ -89,11 +108,14 @@ function Planning() {
           events={events}
           eventContent={renderEventContent}
         />
-        <button onClick={handleClick} className='rounded-md bg-salmon text-white shadow-md outline-none hover:bg-indianred border-black border border-solid p-1.5'>
+        <button
+          onClick={handleClick}
+          className="rounded-md border border-solid border-black bg-salmon p-1.5 text-white shadow-md outline-none hover:bg-indianred"
+        >
           Ajouter Cours
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
