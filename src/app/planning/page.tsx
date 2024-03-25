@@ -1,5 +1,6 @@
 "use client";
 
+import frLocale from "@fullcalendar/core/locales/fr";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
@@ -68,26 +69,26 @@ function Planning() {
               <label>Nom du cours:</label>
               <input
                 type="text"
-                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:!outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-indianred p-1.5 active:!outline-indianred"
               />
               <label>Date de début:</label>
               <input
                 type="datetime-local"
-                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-indianred p-1.5 active:outline-indianred"
               />
               <label>Date de fin:</label>
               <input
                 type="datetime-local"
-                className="bg-white-100 rounded-md border border-solid border-salmon p-1.5 active:outline-indianred"
+                className="bg-white-100 rounded-md border border-solid border-indianred p-1.5 active:outline-indianred"
               />
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
                 type="submit"
               >
                 Ajouter
               </button>
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
                 onClick={() => setIsPopupOpen(false)}
               >
                 Annuler
@@ -105,12 +106,14 @@ function Planning() {
             center: "title",
             end: "today prev,next",
           }}
+          locales={[frLocale]}
+          locale={"fr"}
           events={events}
           eventContent={renderEventContent}
         />
         <button
           onClick={handleClick}
-          className="text-white-100 rounded-md border border-solid border-black bg-salmon p-1.5 shadow-md outline-none hover:bg-indianred"
+          className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
         >
           Ajouter Cours
         </button>

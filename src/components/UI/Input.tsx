@@ -16,7 +16,7 @@ const Input: React.FC<Props> = ({
   label,
 }) => {
   return (
-    <label className="flex flex-col" htmlFor={label}>
+    <label className="flex w-full flex-col" htmlFor={label}>
       <p className="font-bold">{label}</p>
       <input
         type={type || "text"}
@@ -24,9 +24,8 @@ const Input: React.FC<Props> = ({
         id={label}
         placeholder={placeholder}
         disabled={disabled}
-        className={`bg-white-100 rounded-md 
-                  border border-solid
-                  border-gray-300 
+        className={`rounded-md border border-solid 
+                  border-gray-300 bg-white-100 
                   p-2 shadow-md outline-1 
                   focus:outline-gray-400 
                   disabled:cursor-not-allowed

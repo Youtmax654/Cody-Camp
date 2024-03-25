@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import {
   LuCalendarClock,
@@ -10,12 +11,16 @@ import {
   LuLogOut,
   LuMegaphone,
   LuMessagesSquare,
+  LuMoon,
   LuSettings,
+  LuSun,
 } from "react-icons/lu";
 import logo from "../public/logo.jpg";
+import Switch from "./UI/Switch";
 
 function Header() {
   const pathName = usePathname();
+  const [navUnfolded, setNavUnfolded] = useState(true);
 
   const links = [
     { href: "/home", label: "Accueil", icon: LuHome },
@@ -25,26 +30,7 @@ function Header() {
   ];
 
   const handleNavbar = () => {
-    const navbar = document.querySelector("nav");
-    const links = document.querySelectorAll("nav a p, nav div #log-out");
-    const name = document.querySelector("header div p");
-    const button = document.querySelector("header button#navbar-button");
-
-    if (navbar?.classList.contains("w-52")) {
-      navbar?.classList.remove("w-52");
-      navbar?.classList.add("w-[56px]");
-      links.forEach((link) => link.classList.add("hidden"));
-      name?.classList.add("hidden");
-      button?.classList.add("rotate-180");
-    } else {
-      navbar?.classList.remove("w-[56px]");
-      navbar?.classList.add("w-52");
-      button?.classList.remove("rotate-180");
-      setTimeout(() => {
-        links.forEach((link) => link.classList.remove("hidden"));
-        name?.classList.remove("hidden");
-      }, 150);
-    }
+    setNavUnfolded(!navUnfolded);
   };
 
   const handleLogOut = () => {
@@ -52,21 +38,50 @@ function Header() {
     location.href = "/";
   };
 
+  const DarkModeSwitch = () => {
+    if (navUnfolded) {
+      return (
+        <div
+          className="m-2 flex flex-row items-center 
+                    justify-center gap-4 rounded-md p-2 
+                    font-semibold transition-colors 
+                    duration-300 ease-in-out"
+        >
+          <LuSun size={24} />
+          <Switch id="dark-mode" name="dark-mode" />
+          <LuMoon size={24} />
+        </div>
+      );
+    } else {
+      return (
+        <button
+          className="m-2 flex rounded-md p-2 
+                    transition-colors duration-300 
+                    ease-in-out hover:bg-black/15"
+        >
+          <LuSun size={24} />
+        </button>
+      );
+    }
+  };
+
   return (
-    <header
-      className="relative flex h-full 
-                flex-col rounded-e-xl 
-                border border-solid 
-                border-black/20 
-                bg-white-100 shadow-md"
+    <div
+      className={`relative flex h-full flex-col text-nowrap 
+                rounded-e-xl border 
+                border-solid border-black/20
+                bg-white shadow-md transition-width
+                duration-300 ease-out dark:bg-dark
+                dark:text-white
+                ${!navUnfolded ? "w-[58px]" : "w-52"}`}
     >
       <div
         className={`
                     flex flex-row items-center 
-                    gap-2 border-b border-solid 
-                    border-black/20 pb-3 pl-2
-                    pt-2 font-bold transition-colors
-                    duration-300 ease-in-out
+                    gap-2 overflow-hidden border-b 
+                    border-solid border-black/20 pb-3
+                    pl-2 pt-2 font-bold
+                    transition-colors duration-300 ease-in-out
                   `}
       >
         <Image
@@ -76,14 +91,13 @@ function Header() {
           alt="logo"
           className="rounded-lg"
         />
-        <p>Maxime Penn</p>
+        <p className={`${!navUnfolded ? "invisible" : ""}`}>Maxime Penn</p>
       </div>
       <nav
-        className="flex w-52 flex-1 flex-col 
-                  justify-between transition-width 
-                  duration-300 ease-out"
+        className="flex flex-1 flex-col 
+                  justify-between overflow-hidden"
       >
-        <div>
+        <div className="w-full">
           {links.map(({ href, label, icon: Icon }) => {
             return (
               <Link
@@ -99,13 +113,15 @@ function Header() {
                               : ""
                           }`}
               >
-                <Icon size={24} />
-                <p>{label}</p>
+                <div className="size-6">
+                  <Icon size={24} />
+                </div>
+                <p className={`${!navUnfolded ? "invisible" : ""}`}>{label}</p>
               </Link>
             );
           })}
         </div>
-        <div className="border-t border-solid border-black/20">
+        <div className="w-full border-t border-solid border-black/20">
           <Link
             href="/settings"
             className={`m-2 flex flex-row
@@ -118,8 +134,10 @@ function Header() {
                             : ""
                         }`}
           >
-            <LuSettings size={24} />
-            <p>Paramètres</p>
+            <div className="size-6">
+              <LuSettings size={24} />
+            </div>
+            <p className={`${!navUnfolded ? "invisible" : ""}`}>Paramètres</p>
           </Link>
           <div
             onClick={handleLogOut}
@@ -129,22 +147,28 @@ function Header() {
                       transition-colors duration-300 
                       ease-in-out hover:bg-black/15"
           >
-            <LuLogOut size={24} />
-            <p id="log-out">Déconnexion</p>
+            <div className="size-6">
+              <LuLogOut size={24} />
+            </div>
+            <p id="log-out" className={`${!navUnfolded ? "invisible" : ""}`}>
+              Déconnexion
+            </p>
           </div>
+          <DarkModeSwitch />
         </div>
       </nav>
       <button
         id="navbar-button"
         onClick={handleNavbar}
-        className="absolute -right-3 top-4 flex 
-                  size-5 items-center justify-center 
-                  rounded-full bg-indianred shadow-md 
-                  focus:outline-none"
+        className={`absolute -right-3 top-4 z-50 
+                  flex size-5 items-center 
+                  justify-center rounded-full bg-indianred 
+                  shadow-md focus:outline-none
+                  ${!navUnfolded ? "rotate-180" : ""}`}
       >
         <IoIosArrowBack size={15} color="white" />
       </button>
-    </header>
+    </div>
   );
 }
 

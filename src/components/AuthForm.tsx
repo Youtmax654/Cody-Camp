@@ -135,13 +135,13 @@ const LoginForm = () => {
       {formState !== "" && (
         <IoMdArrowRoundBack
           className="absolute left-3 top-4 cursor-pointer text-3xl md:-left-10 md:-top-20"
-          color="#fa7268"
+          color="#EF5F67"
           onClick={handleReturn}
         />
       )}
       <div className="flex flex-col gap-1">
         <h1 className="text-center text-2xl font-semibold">{getTitleText()}</h1>
-        <h2 className="text-center text-sm text-black-100/70">
+        <h2 className="text-center text-sm text-black/70">
           {getSubtitleText()}
         </h2>
       </div>

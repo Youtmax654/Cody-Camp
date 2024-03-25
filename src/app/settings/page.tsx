@@ -26,13 +26,13 @@ function Settings() {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex flex-1 flex-col">
       <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4">
         {tabs.map((tab) => (
           <button
             key={tab}
             className={`p-4 font-bold transition-colors duration-300 ${
-              activeTab === tab && "text-salmon"
+              activeTab === tab && "text-indianred"
             }`}
             onClick={() => setActiveTab(tab)}
           >
@@ -40,7 +40,7 @@ function Settings() {
           </button>
         ))}
       </nav>
-      <div className="w-full overflow-y-scroll">
+      <div className="size-full overflow-y-scroll bg-gray-500/5">
         <TabContent />
       </div>
     </div>
