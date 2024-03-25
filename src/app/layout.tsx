@@ -17,7 +17,7 @@ export default function RootLayout({
   const pathname = usePathname();
 
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${inter.className} ${
           pathname !== "/" ? "flex flex-row" : ""

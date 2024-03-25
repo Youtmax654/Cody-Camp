@@ -1,11 +1,12 @@
 import Button from "@/components/UI/Button";
+import Switch from "@/components/UI/Switch";
 
 const Notifications = () => {
   const checkBoxes = [
-    { id: 1, name: "newMessages", label: "Nouveau message" },
-    { id: 2, name: "newComments", label: "Nouveau commentaire" },
-    { id: 3, name: "newLikes", label: "Nouveau like" },
-    { id: 4, name: "newFollowers", label: "Nouveau abonné" },
+    { name: "newMessages", label: "Nouveau message" },
+    { name: "newComments", label: "Nouveau commentaire" },
+    { name: "newLikes", label: "Nouveau like" },
+    { name: "newFollowers", label: "Nouveau abonné" },
   ];
 
   return (
@@ -18,11 +19,8 @@ const Notifications = () => {
       </div>
       <form className="flex w-[484px] flex-col gap-8">
         {checkBoxes.map((checkBox) => (
-          <div key={checkBox.id} className="flex flex-row items-center gap-4">
-            <label className="switch flex flex-row">
-              <input type="checkbox" />
-              <span className="slider"></span>
-            </label>
+          <div key={checkBox.name} className="flex flex-row items-center gap-4">
+            <Switch id={checkBox.name} name={checkBox.name} />
             <p>{checkBox.label}</p>
           </div>
         ))}
