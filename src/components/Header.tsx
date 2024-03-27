@@ -9,6 +9,7 @@ import {
   LuCalendarClock,
   LuHome,
   LuLogOut,
+  LuMails,
   LuMegaphone,
   LuMessagesSquare,
   LuMoon,
@@ -24,9 +25,10 @@ function Header() {
 
   const links = [
     { href: "/home", label: "Accueil", icon: LuHome },
-    { href: "/mailbox", label: "Messagerie", icon: LuMessagesSquare },
+    { href: "/mailbox", label: "Messagerie", icon: LuMails },
     { href: "/planning", label: "Planning", icon: LuCalendarClock },
     { href: "/announcement", label: "Annonces", icon: LuMegaphone },
+    { href: "/forum", label: "Forum", icon: LuMessagesSquare },
   ];
 
   const handleNavbar = () => {

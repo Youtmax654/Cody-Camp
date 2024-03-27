@@ -164,3 +164,18 @@ main.wave {
   height: 1.5em;
   bottom: 0;
 }
+
+@keyframes slideFromRight {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
+textarea {
+  resize: both; /* Permet la redimension de la zone de texte */
+  width: 300px; /* Largeur initiale de la zone de texte */
+  height: 100px; /* Hauteur initiale de la zone de texte */
+}
