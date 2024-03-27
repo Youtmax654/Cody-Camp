@@ -14,7 +14,9 @@ const ChangePassword = () => {
         <Input label="Ancien mot de passe" type="password" />
         <Input label="Nouveau mot de passe" type="password" />
         <Input label="Confirmer le mot de passe" type="password" />
-        <Button value="Valider" type="submit" className="w-fit p-2" />
+        <Button type="submit" className="w-fit p-2">
+          Valider
+        </Button>
       </form>
     </section>
   );

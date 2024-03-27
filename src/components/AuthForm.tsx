@@ -4,9 +4,19 @@ import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Button from "./UI/Button";
 
-import { useRouter } from "next/navigation";
+import { useFormState } from "@/hooks/useFormState";
+import { useUser } from "@/hooks/useUser";
 import { toast } from "react-toastify";
 import Input from "./UI/Input";
+import Spinner from "./UI/Spinner";
+
+type Users = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const RenderPasswordField = () => (
   <Input placeholder="Mot de passe" type="password" name="password" />
@@ -23,24 +33,56 @@ const RenderRegistrationFields = () => (
   </>
 );
 
-const LoginForm = () => {
-  const usersMails = ["maxime.penn@edu.esiee-it.fr"];
-  const passwords = ["password"];
+const AuthForm = () => {
+  const { userExist, register, login } = useUser();
+  const { formState, setFormState, accountExist, setAccountExist } =
+    useFormState();
 
-  const router = useRouter();
-
-  const [formState, setFormState] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(false);
-  const [accountExist, setAccountExist] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const target = e.target as typeof e.target & {
       email: { value: string };
       password: { value: string };
       confirmPassword: { value: string };
     };
     const email = target.email.value;
+    const password = target.password?.value;
+    const confirmPassword = target.confirmPassword?.value;
+
+    switch (formState) {
+      case "signup":
+        await register({ email, password, confirmPassword })
+          .then((res) => {
+            console.log(res);
+            setIsLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        break;
+      case "signin":
+        await login({ email, password })
+          .then((res) => {
+            console.log(res);
+            setIsLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        break;
+      default:
+        if (await userExist(email)) {
+          setAccountExist(true);
+          setIsLoading(false);
+        } else {
+          setAccountExist(false);
+          setIsLoading(false);
+        }
+    }
 
     if (email.length === 0) {
       toast.error("Veuillez entrer une adresse e-mail", {
@@ -56,26 +98,6 @@ const LoginForm = () => {
         autoClose: 3000,
       });
       return;
-    }
-
-    switch (formState) {
-      case "signup":
-        alert("signup");
-        // TO DO: signup
-        break;
-      case "signin":
-        const password = target.password.value;
-        if (passwords[usersMails.indexOf(email)] === password) {
-          window.localStorage.setItem("uid", "1");
-          router.push("/home");
-        }
-        break;
-      default:
-        if (mailExist(email)) {
-          setAccountExist(true);
-        } else {
-          setAccountExist(false);
-        }
     }
   };
 
@@ -93,11 +115,6 @@ const LoginForm = () => {
       setEmailIsValid(false);
       return false;
     }
-  };
-
-  const mailExist = (email: string) => {
-    if (usersMails.includes(email)) return true;
-    else return false;
   };
 
   const getTitleText = () => {
@@ -156,20 +173,29 @@ const LoginForm = () => {
           accountExist ? (
             <>
               <RenderPasswordField />
-              <Button value="Se connecter" type="submit" className="mt-3" />
+              <Button type="submit" className="mt-3" disabled={isLoading}>
+                {isLoading ? <Spinner size="sm" /> : ""}
+                Se connecter
+              </Button>
             </>
           ) : (
             <>
               <RenderRegistrationFields />
-              <Button value="S'inscrire" type="submit" className="mt-3" />
+              <Button type="submit" className="mt-3" disabled={isLoading}>
+                {isLoading ? <Spinner size="sm" /> : ""}
+                S&apos;inscrire
+              </Button>
             </>
           )
         ) : (
-          <Button value="Continuer" type="submit" className="mt-3" />
+          <Button type="submit" className="mt-3" disabled={isLoading}>
+            {isLoading ? <Spinner size="sm" /> : ""}
+            Continuer
+          </Button>
         )}
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default AuthForm;

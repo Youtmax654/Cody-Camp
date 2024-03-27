@@ -1,8 +1,10 @@
 "use client";
 
 import Header from "@/components/Header";
+import Loading from "@/components/Loading";
 import { Inter } from "next/font/google";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -14,17 +16,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [headerAppear, setHeaderAppear] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setHeaderAppear(pathname !== "/" && !pathname.includes("/confirmEmail"));
+    if (pathname === "/" && document.cookie.includes("uid")) {
+      redirect("/home");
+    } else if (
+      pathname !== "/" &&
+      !pathname.includes("/confirmEmail") &&
+      !document.cookie.includes("uid")
+    ) {
+      redirect("/");
+    } else {
+      setIsLoading(false);
+    }
+  }, [pathname]);
 
   return (
     <html lang="fr">
       <body
-        className={`${inter.className} ${
-          pathname !== "/" ? "flex flex-row" : ""
-        }`}
+        className={`${inter.className} ${headerAppear ? "flex flex-row" : ""}`}
       >
-        {pathname !== "/" && <Header />}
-        {children}
+        {headerAppear && <Header />}
+        {isLoading ? <Loading /> : children}
         <ToastContainer />
       </body>
     </html>

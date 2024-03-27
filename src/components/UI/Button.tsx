@@ -1,5 +1,7 @@
+import React from "react";
+
 type Props = {
-  value: string;
+  children: React.ReactNode;
   className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
@@ -7,7 +9,7 @@ type Props = {
 };
 
 const Button: React.FC<Props> = ({
-  value,
+  children,
   className,
   disabled,
   type,
@@ -15,7 +17,9 @@ const Button: React.FC<Props> = ({
 }) => {
   return (
     <button
-      className={`rounded-md bg-indianred p-1 
+      className={`flex flex-row items-center
+                justify-center gap-1
+                rounded-md bg-indianred p-1 
                 text-white shadow-md outline-none 
                 transition-colors duration-150 
                 before:bg-black hover:bg-indianred 
@@ -24,7 +28,7 @@ const Button: React.FC<Props> = ({
       type={type || "button"}
       onClick={onClick}
     >
-      {value}
+      {children}
     </button>
   );
 };

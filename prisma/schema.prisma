@@ -8,21 +8,75 @@ datasource db {
 }
 
 model messages {
-  id       Int       @id @default(autoincrement())
-  sender   Int
-  receiver Int
-  content  String    @db.LongText
-  date     DateTime? @default(now()) @db.DateTime(0)
+  id         Int       @id @default(autoincrement())
+  senderId   String    @db.Char(10)
+  receiverId String    @db.Char(10)
+  content    String    @db.LongText
+  datetime   DateTime? @default(now()) @db.DateTime(0)
 
-  @@index([receiver], map: "receiverFK")
-  @@index([sender], map: "senderFK")
+  @@index([receiverId], map: "receiverId_FK")
+  @@index([senderId], map: "senderId_FK")
 }
 
 model users {
-  id        Int    @id @default(autoincrement())
-  firstName String @db.Char(50)
-  lastName  String @db.Char(50)
-  email     String @unique(map: "email") @db.VarChar(100)
-  password  String @db.VarChar(255)
-  role      String @default("étudiant") @db.VarChar(50)
+  id        String  @id @db.Char(10)
+  firstName String  @db.Char(50)
+  lastName  String  @db.Char(50)
+  email     String  @unique(map: "email_UNIQUE") @db.VarChar(100)
+  password  String  @db.VarChar(255)
+  role      String  @default("étudiant") @db.VarChar(50)
+  active    Boolean @default(false)
+}
+
+model announcement {
+  id       Int       @id @default(autoincrement())
+  senderId String    @db.Char(10)
+  content  String    @db.LongText
+  datetime DateTime? @default(now()) @db.DateTime(0)
+
+  @@index([senderId], map: "senderId_FK")
+}
+
+model group_messages {
+  id       Int       @id @default(autoincrement())
+  senderId String    @db.Char(10)
+  groupId  Int
+  content  String    @db.LongText
+  datetime DateTime? @default(now()) @db.DateTime(0)
+
+  @@index([groupId], map: "groupId_FK")
+  @@index([senderId], map: "senderId_FK")
+}
+
+model groups {
+  id          Int    @id @default(autoincrement())
+  name        String @db.Char(50)
+  description String @db.LongText
+}
+
+model planning {
+  id        Int      @id @default(autoincrement())
+  date      DateTime @db.Date
+  startTime DateTime @db.Timestamp(0)
+  endTime   DateTime @db.Timestamp(0)
+  course    String   @db.Char(50)
+  teacher   String   @db.Char(50)
+  room      String   @db.Char(50)
+  class     String   @db.Char(50)
+}
+
+model user_groups {
+  id      Int    @id @default(autoincrement())
+  userId  String @db.Char(10)
+  groupId Int
+
+  @@index([groupId], map: "groupId_FK")
+  @@index([userId], map: "userId_FK")
+}
+
+model authtokens {
+  id     String @id @db.VarChar(255)
+  userId String @db.Char(10)
+
+  @@index([userId], map: "userId_FK")
 }

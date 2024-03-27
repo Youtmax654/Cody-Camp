@@ -24,7 +24,9 @@ const Notifications = () => {
             <p>{checkBox.label}</p>
           </div>
         ))}
-        <Button value="Valider" type="submit" className="w-fit p-2" />
+        <Button type="submit" className="w-fit p-2">
+          Valider
+        </Button>
       </form>
     </section>
   );

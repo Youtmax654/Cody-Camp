@@ -6,8 +6,8 @@
   width: 100%;
   height: 100vh;
   --fc-button-bg-color: #ef5f67;
-  --fc-button-hover-bg-color: #ef5f67;
-  --fc-button-active-bg-color: #ef5f67;
+  --fc-button-hover-bg-color: #d5585e;
+  --fc-button-active-bg-color: #d5585e;
   --fc-border-color: black;
 }
 
