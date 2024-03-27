@@ -23,10 +23,10 @@ const PersonalInformation = () => {
           <div className="flex flex-col justify-center gap-2">
             <label htmlFor="ppInput">
               <div
-                className="bg-white-100 cursor-pointer rounded-md 
-                              border border-solid 
-                              border-black/20 p-2 font-bold shadow-md 
-                              transition-colors hover:bg-black/5"
+                className="cursor-pointer rounded-md border 
+                          border-solid border-black/20 
+                          bg-white p-2 font-bold shadow-md 
+                          transition-colors hover:bg-black/5"
               >
                 Changer la photo de profil
               </div>
@@ -43,7 +43,9 @@ const PersonalInformation = () => {
           label="Adresse email"
           placeholder="maxime.penn@edu.esiee-it.fr"
         />
-        <Button value="Valider" type="submit" className="w-fit p-2" />
+        <Button type="submit" className="w-fit p-2">
+          Valider
+        </Button>
       </form>
     </section>
   );

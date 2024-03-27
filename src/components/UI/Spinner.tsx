@@ -22,11 +22,7 @@ const Spinner: React.FC<Props> = ({ size }) => {
                 }
                 `}
       role="status"
-    >
-      <span className="!white-100space-nowrap !absolute !-m-px !h-px !w-px !overflow-hidden !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-        Loading...
-      </span>
-    </div>
+    ></div>
   );
 };
 
