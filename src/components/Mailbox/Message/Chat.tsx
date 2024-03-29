@@ -1,20 +1,27 @@
-import Send from "./Send";
 import Image from "next/image";
 import ContentMessage from "./ContentMessage";
+import Send from "./Send";
 
-const Chat =()=>{
-    return(
-        <div className=" flex flex-col flex-1 overflow-y-scroll">
-            <div className="border-black/20 border-b border-solid flex flex-row items-center">
-                <Image src={"/public/avatar.jpg"} alt="Profile picture" width={50} height={50}
-                className=" rounded-full m-3" /> 
-                <span className=" right-0 top-0 size-2 block rounded-full bg-green-500 ring-2 ring-white md:size-3 "/>
-                <p className="text-black ml-3 border-black/20 border-solid border-l p-4">Pseudo</p>
-            </div>
-            <ContentMessage/>
-            <Send/>
-        </div>
-    );
-}
+const Chat = () => {
+  return (
+    <div className=" flex flex-1 flex-col overflow-y-scroll">
+      <div className="flex flex-row items-center border-b border-solid border-black/20">
+        <Image
+          src={"/public/avatar.jpg"}
+          alt="Profile picture"
+          width={50}
+          height={50}
+          className=" m-3 rounded-full"
+        />
+        <span className=" right-0 top-0 block size-2 rounded-full bg-green-500 ring-2 ring-white md:size-3 " />
+        <p className="ml-3 border-l border-solid border-black/20 p-4 text-black">
+          Pseudo
+        </p>
+      </div>
+      <ContentMessage />
+      <Send />
+    </div>
+  );
+};
 
 export default Chat;
