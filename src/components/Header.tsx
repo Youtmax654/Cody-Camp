@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "@/hooks/useUser";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,7 +20,7 @@ import {
 import logo from "../public/logo.jpg";
 import Switch from "./UI/Switch";
 
-function Header() {
+function Header({ user }: { user: User | undefined }) {
   const pathName = usePathname();
   const [navUnfolded, setNavUnfolded] = useState(true);
 
@@ -93,7 +94,9 @@ function Header() {
           alt="logo"
           className="rounded-lg"
         />
-        <p className={`${!navUnfolded ? "invisible" : ""}`}>Maxime Penn</p>
+        <p className={`${!navUnfolded ? "invisible" : ""}`}>
+          {user?.firstName} {user?.lastName}
+        </p>
       </div>
       <nav
         className="flex flex-1 flex-col 

@@ -9,8 +9,8 @@ datasource db {
 
 model messages {
   id         Int       @id @default(autoincrement())
-  senderId   String    @db.Char(10)
-  receiverId String    @db.Char(10)
+  senderId   String    @db.Char(36)
+  receiverId String    @db.Char(36)
   content    String    @db.LongText
   datetime   DateTime? @default(now()) @db.DateTime(0)
 
@@ -19,7 +19,7 @@ model messages {
 }
 
 model users {
-  id        String  @id @db.Char(10)
+  id        String  @id @db.Char(36)
   firstName String  @db.Char(50)
   lastName  String  @db.Char(50)
   email     String  @unique(map: "email_UNIQUE") @db.VarChar(100)
@@ -30,7 +30,7 @@ model users {
 
 model announcement {
   id       Int       @id @default(autoincrement())
-  senderId String    @db.Char(10)
+  senderId String    @db.Char(36)
   content  String    @db.LongText
   datetime DateTime? @default(now()) @db.DateTime(0)
 
@@ -39,7 +39,7 @@ model announcement {
 
 model group_messages {
   id       Int       @id @default(autoincrement())
-  senderId String    @db.Char(10)
+  senderId String    @db.Char(36)
   groupId  Int
   content  String    @db.LongText
   datetime DateTime? @default(now()) @db.DateTime(0)
@@ -67,7 +67,7 @@ model planning {
 
 model user_groups {
   id      Int    @id @default(autoincrement())
-  userId  String @db.Char(10)
+  userId  String @db.Char(36)
   groupId Int
 
   @@index([groupId], map: "groupId_FK")
@@ -76,7 +76,7 @@ model user_groups {
 
 model authtokens {
   id     String @id @db.VarChar(255)
-  userId String @db.Char(10)
+  userId String @db.Char(36)
 
   @@index([userId], map: "userId_FK")
 }

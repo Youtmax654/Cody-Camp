@@ -2,6 +2,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -11,7 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const body = await req.json();
 
-    const uid = Math.random().toString(36).substring(2, 12).toUpperCase();
+    const uid = randomUUID();
     const firstName = body.firstName;
     const lastName = body.lastName;
     const email = body.email;
