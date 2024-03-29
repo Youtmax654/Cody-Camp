@@ -46,7 +46,7 @@ export default function RootLayout({
   }, [pathname]); // useEffect will run only when getUser or userDataLoaded changes
 
   const LayoutSelector = () => {
-    if (pathname === "/" || pathname.startsWith("confirmEmail")) {
+    if (pathname === "/" || pathname.startsWith("/confirmEmail")) {
       return <DisconnectedLayout>{children}</DisconnectedLayout>;
     } else {
       return (

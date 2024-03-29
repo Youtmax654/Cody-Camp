@@ -1,11 +1,10 @@
 "use client";
 
-import Spinner from "@/components/UI/Spinner";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import Loading from "@/components/Loading";
 import { ReactElement, useEffect, useState } from "react";
 
-const ConfirmEmail = ({ params }: Params) => {
-  const [response, setResponse] = useState<ReactElement>(<Spinner size="xl" />);
+const ConfirmEmail = ({ params }: { params: { token: string } }) => {
+  const [response, setResponse] = useState<ReactElement>(<Loading />);
   const token = params.token;
 
   useEffect(() => {
