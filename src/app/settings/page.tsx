@@ -1,22 +1,37 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import ChangePassword from "@/components/Settings/Account/ChangePassword";
 import PersonalInformation from "@/components/Settings/Account/PersonalInformation";
 import Notifications from "@/components/Settings/Notifications/Notifications";
-import { useState } from "react";
+import { User, useUser } from "@/hooks/useUser";
+import { useEffect, useState } from "react";
 
 const tabs = ["Compte", "Notifications"] as const;
 type Tab = (typeof tabs)[number];
 
 function Settings() {
   const [activeTab, setActiveTab] = useState<Tab>("Compte");
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>({} as User);
+
+  const { getUser } = useUser();
+
+  useEffect(() => {
+    getUser().then((data) => {
+      if (data) {
+        setUser(data);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   const TabContent: React.FC = () => {
     switch (activeTab) {
       case "Compte":
         return (
           <>
-            <PersonalInformation />
+            <PersonalInformation user={user} />
             <ChangePassword />
           </>
         );
@@ -24,6 +39,14 @@ function Settings() {
         return <Notifications />;
     }
   };
+
+  if (loading) {
+    return (
+      <main className="flex flex-1 items-center justify-center">
+        <Loading />
+      </main>
+    );
+  }
 
   return (
     <div className="flex flex-1 flex-col">

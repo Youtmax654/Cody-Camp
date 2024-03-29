@@ -1,8 +1,9 @@
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
+import { User } from "@/hooks/useUser";
 import Image from "next/image";
 
-const PersonalInformation = () => {
+const PersonalInformation = ({ user }: { user: User }) => {
   return (
     <section className="flex flex-row gap-10 border-b border-solid border-black/20 py-10 pl-8">
       <div className="w-1/3">
@@ -36,13 +37,10 @@ const PersonalInformation = () => {
           </div>
         </div>
         <div className="flex w-full gap-4">
-          <Input label="Prénom" placeholder="Maxime" />
-          <Input label="Nom" placeholder="Penn" />
+          <Input label="Prénom" placeholder={user.firstName} />
+          <Input label="Nom" placeholder={user.lastName} />
         </div>
-        <Input
-          label="Adresse email"
-          placeholder="maxime.penn@edu.esiee-it.fr"
-        />
+        <Input label="Adresse email" placeholder={user.email} />
         <Button type="submit" className="w-fit p-2">
           Valider
         </Button>

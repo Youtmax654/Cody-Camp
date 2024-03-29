@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Button from "./UI/Button";
 
-import { useFormState } from "@/hooks/useFormState";
 import { useUser } from "@/hooks/useUser";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Input from "./UI/Input";
 import Spinner from "./UI/Spinner";
@@ -35,11 +35,12 @@ const RenderRegistrationFields = () => (
 
 const AuthForm = () => {
   const { userExist, register, login } = useUser();
-  const { formState, setFormState, accountExist, setAccountExist } =
-    useFormState();
+  const router = useRouter();
 
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formState, setFormState] = useState<"signup" | "signin" | "">("");
+  const [accountExist, setAccountExist] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -57,8 +58,9 @@ const AuthForm = () => {
       case "signup":
         await register({ email, password, confirmPassword })
           .then((res) => {
-            console.log(res);
             setIsLoading(false);
+            setFormState("signin");
+            setAccountExist(true);
           })
           .catch((err) => {
             console.log(err);
@@ -69,6 +71,7 @@ const AuthForm = () => {
           .then((res) => {
             console.log(res);
             setIsLoading(false);
+            router.push("/home");
           })
           .catch((err) => {
             console.log(err);

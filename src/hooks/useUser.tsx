@@ -1,8 +1,8 @@
+import { getCookie, setCookie } from "@/utils/cookies";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useFormState } from "./useFormState";
 
-type User = {
+export type User = {
   firstName?: string;
   lastName?: string;
   email: string;
@@ -11,7 +11,6 @@ type User = {
 };
 
 export const useUser = () => {
-  const { setFormState, setAccountExist } = useFormState();
   const router = useRouter();
 
   const userExist = async (email: string) => {
@@ -55,8 +54,6 @@ export const useUser = () => {
       });
 
       if (res2.status === 201) {
-        setFormState("signin");
-        setAccountExist(true);
         toast.success(
           "Compte créé avec succès, un lien de confirmation vous a été envoyé par e-mail",
           {
@@ -82,7 +79,7 @@ export const useUser = () => {
         toastId: "loginError",
         autoClose: 3000,
       });
-      return res;
+      return;
     } else if (res.status === 201) {
       const data = await res.json();
       toast.success("Connexion réussie", {
@@ -90,14 +87,31 @@ export const useUser = () => {
         autoClose: 3000,
       });
 
-      const d = new Date();
-      d.setTime(d.getTime() + 25 * 60 * 60 * 1000);
-      const formattedDate = d.toUTCString();
-      document.cookie = `uid=${data.id}; expires=${formattedDate}; path=/;`;
+      console.log("Setting UID:", data.id);
+      setCookie("uid", data.id, 1);
 
-      router.push("/home");
+      return;
     }
   };
 
-  return { userExist, register, login };
+  const getUser = async () => {
+    const uid = getCookie("uid");
+    console.log("Get UID:", uid);
+    if (uid) {
+      const res = await fetch("/api/user/getUserWithId", {
+        method: "POST",
+        body: JSON.stringify({ uid: uid }),
+      });
+      if (res.status === 201) {
+        const data = await res.json();
+        return data as User;
+      }
+      if (res.status === 404) {
+        return;
+      }
+    }
+    return;
+  };
+
+  return { userExist, register, login, getUser };
 };
