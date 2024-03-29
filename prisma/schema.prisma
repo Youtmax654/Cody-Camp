@@ -19,13 +19,15 @@ model messages {
 }
 
 model users {
-  id        String  @id @db.Char(36)
-  firstName String  @db.Char(50)
-  lastName  String  @db.Char(50)
-  email     String  @unique(map: "email_UNIQUE") @db.VarChar(100)
-  password  String  @db.VarChar(255)
-  role      String  @default("étudiant") @db.VarChar(50)
-  active    Boolean @default(false)
+  id          String  @id @db.Char(36)
+  firstName   String  @db.Char(50)
+  lastName    String  @db.Char(50)
+  email       String  @unique(map: "email_UNIQUE") @db.VarChar(100)
+  secondEmail String? @db.VarChar(100)
+  password    String  @db.VarChar(255)
+  role        String  @default("étudiant") @db.VarChar(50)
+  
+  active      Boolean @default(false)
 }
 
 model announcement {
@@ -57,8 +59,8 @@ model groups {
 model planning {
   id        Int      @id @default(autoincrement())
   date      DateTime @db.Date
-  startTime DateTime @db.Timestamp(0)
-  endTime   DateTime @db.Timestamp(0)
+  startTime DateTime @default(now()) @db.Timestamp(0)
+  endTime   DateTime @default(dbgenerated("('0000-00-00 00:00:00')")) @db.Timestamp(0)
   course    String   @db.Char(50)
   teacher   String   @db.Char(50)
   room      String   @db.Char(50)
