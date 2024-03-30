@@ -18,9 +18,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       });
       if (res) {
         await prisma.authtokens.delete({
-          where: {
-            id: token,
-          },
+          where: { id: token },
         });
         const user = await prisma.users.update({
           where: {

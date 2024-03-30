@@ -11,9 +11,21 @@ const ChangePassword = () => {
         </p>
       </div>
       <form className="flex w-[484px] flex-col gap-8">
-        <Input label="Ancien mot de passe" type="password" />
-        <Input label="Nouveau mot de passe" type="password" />
-        <Input label="Confirmer le mot de passe" type="password" />
+        <Input
+          label="Ancien mot de passe"
+          type="password"
+          placeholder="••••••••••"
+        />
+        <Input
+          label="Nouveau mot de passe"
+          type="password"
+          placeholder="••••••••••"
+        />
+        <Input
+          label="Confirmer le mot de passe"
+          type="password"
+          placeholder="••••••••••"
+        />
         <Button type="submit" className="w-fit p-2">
           Valider
         </Button>

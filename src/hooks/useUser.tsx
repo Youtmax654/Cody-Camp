@@ -6,6 +6,7 @@ export type User = {
   firstName?: string;
   lastName?: string;
   email: string;
+  secondEmail?: string;
   password: string;
   confirmPassword?: string;
 };
@@ -28,8 +29,10 @@ export const useUser = () => {
   };
 
   const register = async ({ email, password, confirmPassword }: User) => {
-    const firstName = email.split(".")[0];
-    const lastName = email.split(".")[1].split("@")[0];
+    const fN = email.split(".")[0];
+    const firstName = fN.charAt(0).toUpperCase() + fN.slice(1);
+    const lN = email.split(".")[1].split("@")[0];
+    const lastName = lN.charAt(0).toUpperCase() + lN.slice(1);
 
     const user = { firstName, lastName, email, password, confirmPassword };
 
@@ -89,6 +92,7 @@ export const useUser = () => {
 
       console.log("Setting UID:", data.id);
       setCookie("uid", data.id, 1);
+      router.push("/home");
 
       return;
     }
