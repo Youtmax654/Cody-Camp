@@ -6,6 +6,7 @@ export type User = {
   firstName?: string;
   lastName?: string;
   email: string;
+  secondEmail?: string;
   password: string;
   confirmPassword?: string;
 };
@@ -14,9 +15,11 @@ export const useUser = () => {
   const router = useRouter();
 
   const userExist = async (email: string) => {
-    const res = await fetch("/api/user/getUserWithEmail", {
-      method: "POST",
-      body: JSON.stringify({ email: email }),
+    const res = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        email: email,
+      },
     });
     if (res.status === 201) {
       const data = await res.json();
@@ -28,10 +31,12 @@ export const useUser = () => {
   };
 
   const register = async ({ email, password, confirmPassword }: User) => {
-    const firstName = email.split(".")[0];
-    const lastName = email.split(".")[1].split("@")[0];
+    const fN = email.split(".")[0];
+    const firstName = fN.charAt(0).toUpperCase() + fN.slice(1);
+    const lN = email.split(".")[1].split("@")[0];
+    const lastName = lN.charAt(0).toUpperCase() + lN.slice(1);
 
-    const user = { firstName, lastName, email, password, confirmPassword };
+    const user = { firstName, lastName, email, password };
 
     if (password !== confirmPassword) {
       toast.error("Les mots de passe ne correspondent pas", {
@@ -89,6 +94,7 @@ export const useUser = () => {
 
       console.log("Setting UID:", data.id);
       setCookie("uid", data.id, 1);
+      router.push("/home");
 
       return;
     }
@@ -98,9 +104,11 @@ export const useUser = () => {
     const uid = getCookie("uid");
     console.log("Get UID:", uid);
     if (uid) {
-      const res = await fetch("/api/user/getUserWithId", {
-        method: "POST",
-        body: JSON.stringify({ uid: uid }),
+      const res = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          uid: uid,
+        },
       });
       if (res.status === 201) {
         const data = await res.json();

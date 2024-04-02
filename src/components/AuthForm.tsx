@@ -8,7 +8,6 @@ import { useUser } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Input from "./UI/Input";
-import Spinner from "./UI/Spinner";
 
 type Users = {
   firstName: string;
@@ -71,7 +70,6 @@ const AuthForm = () => {
           .then((res) => {
             console.log(res);
             setIsLoading(false);
-            router.push("/home");
           })
           .catch((err) => {
             console.log(err);
@@ -176,23 +174,35 @@ const AuthForm = () => {
           accountExist ? (
             <>
               <RenderPasswordField />
-              <Button type="submit" className="mt-3" disabled={isLoading}>
-                {isLoading ? <Spinner size="sm" /> : ""}
+              <Button
+                type="submit"
+                className="mt-3"
+                disabled={isLoading}
+                isLoading={isLoading}
+              >
                 Se connecter
               </Button>
             </>
           ) : (
             <>
               <RenderRegistrationFields />
-              <Button type="submit" className="mt-3" disabled={isLoading}>
-                {isLoading ? <Spinner size="sm" /> : ""}
+              <Button
+                type="submit"
+                className="mt-3"
+                disabled={isLoading}
+                isLoading={isLoading}
+              >
                 S&apos;inscrire
               </Button>
             </>
           )
         ) : (
-          <Button type="submit" className="mt-3" disabled={isLoading}>
-            {isLoading ? <Spinner size="sm" /> : ""}
+          <Button
+            type="submit"
+            className="mt-3"
+            disabled={isLoading}
+            isLoading={isLoading}
+          >
             Continuer
           </Button>
         )}

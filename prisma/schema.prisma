@@ -20,13 +20,14 @@ model messages {
 }
 
 model users {
-  id          String  @id @db.Char(36)
-  firstName   String  @db.Char(50)
-  lastName    String  @db.Char(50)
-  email       String  @unique @db.VarChar(100)
-  password    String  @db.VarChar(255)
-  role        String  @default("étudiant") @db.VarChar(50)
-  active      Boolean @default(false)
+  id            String  @id @db.Char(36)
+  firstName     String  @db.Char(50)
+  lastName      String  @db.Char(50)
+  email         String  @unique @db.VarChar(100)
+  secondEmail String? @db.VarChar(100)
+  password      String  @db.VarChar(255)
+  role          String  @default("étudiant") @db.VarChar(50)
+  active        Boolean @default(false)
   secondEmail String? @db.VarChar(100)
 }
 

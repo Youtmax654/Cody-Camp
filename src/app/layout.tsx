@@ -3,6 +3,7 @@
 import { User, useUser } from "@/hooks/useUser";
 import ConnectedLayout from "@/layouts/ConnectedLayout";
 import DisconnectedLayout from "@/layouts/DisconnectedLayout";
+import { getCookie } from "@/utils/cookies";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -11,10 +12,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const [loading, setLoading] = useState(true);
-
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -37,13 +37,25 @@ export default function RootLayout({
   // };
 
   useEffect(() => {
+    if (pathname !== "/" && getCookie("uid")) {
+      setIsConnected(true);
+    } else if (
+      pathname === "/" &&
+      pathname.startsWith("/confirmEmail") &&
+      !getCookie("uid")
+    ) {
+      setIsConnected(false);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
     getUser().then((data) => {
       if (data) {
         setUser(data);
         setLoading(false);
       }
     });
-  }, [pathname]); // useEffect will run only when getUser or userDataLoaded changes
+  }, [isConnected]); // useEffect will run only when getUser or userDataLoaded changes
 
   const LayoutSelector = () => {
     if (pathname === "/" || pathname.startsWith("/confirmEmail")) {
@@ -56,16 +68,6 @@ export default function RootLayout({
       );
     }
   };
-
-  // if (loading) {
-  //   return (
-  //     <html lang="fr">
-  //       <body>
-  //         <Loading />
-  //       </body>
-  //     </html>
-  //   );
-  // }
 
   return <LayoutSelector />;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "./Spinner";
 
 type Props = {
   children: React.ReactNode;
@@ -6,6 +7,7 @@ type Props = {
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  isLoading?: boolean;
 };
 
 const Button: React.FC<Props> = ({
@@ -14,6 +16,7 @@ const Button: React.FC<Props> = ({
   disabled,
   type,
   onClick,
+  isLoading,
 }) => {
   return (
     <button
@@ -28,6 +31,7 @@ const Button: React.FC<Props> = ({
       type={type || "button"}
       onClick={onClick}
     >
+      {isLoading && <Spinner size="sm" />}
       {children}
     </button>
   );
