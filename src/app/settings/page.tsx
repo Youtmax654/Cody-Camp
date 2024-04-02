@@ -32,7 +32,7 @@ function Settings() {
         return (
           <>
             <PersonalInformation user={user} />
-            <ChangePassword />
+            <ChangePassword user={user} />
           </>
         );
       case "Notifications":

@@ -15,9 +15,11 @@ export const useUser = () => {
   const router = useRouter();
 
   const userExist = async (email: string) => {
-    const res = await fetch("/api/user/getUserWithEmail", {
-      method: "POST",
-      body: JSON.stringify({ email: email }),
+    const res = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        email: email,
+      },
     });
     if (res.status === 201) {
       const data = await res.json();
@@ -34,7 +36,7 @@ export const useUser = () => {
     const lN = email.split(".")[1].split("@")[0];
     const lastName = lN.charAt(0).toUpperCase() + lN.slice(1);
 
-    const user = { firstName, lastName, email, password, confirmPassword };
+    const user = { firstName, lastName, email, password };
 
     if (password !== confirmPassword) {
       toast.error("Les mots de passe ne correspondent pas", {
@@ -102,9 +104,11 @@ export const useUser = () => {
     const uid = getCookie("uid");
     console.log("Get UID:", uid);
     if (uid) {
-      const res = await fetch("/api/user/getUserWithId", {
-        method: "POST",
-        body: JSON.stringify({ uid: uid }),
+      const res = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          uid: uid,
+        },
       });
       if (res.status === 201) {
         const data = await res.json();

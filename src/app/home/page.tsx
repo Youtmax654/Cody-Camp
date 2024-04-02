@@ -11,6 +11,7 @@ function Home() {
   const { getUser } = useUser();
 
   useEffect(() => {
+    console.log("Getting user");
     getUser().then((data) => {
       if (data) {
         setUser(data);
