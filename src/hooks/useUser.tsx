@@ -113,5 +113,21 @@ export const useUser = () => {
     return;
   };
 
-  return { userExist, register, login, getUser };
+  const getAllUsers = async ()=> {
+    try {
+      const res = await fetch("/api/user/getOtherUser",{
+        method: "POST"});
+      if (res.ok) {
+        const data: User[] = await res.json();
+        return data;
+      } else {
+        throw new Error("Failed to fetch users"); 
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      throw error;
+    }
+  };
+
+  return { userExist, register, login, getUser, getAllUsers };
 };

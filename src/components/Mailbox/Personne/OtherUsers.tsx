@@ -1,26 +1,24 @@
+import React from "react";
 import Avatar from "./Avatar";
+import { User } from "@/hooks/useUser";
 
-const OtherUsers = () => {
-  return (
-    <div className="mr-2 flex flex-1">
-      <div
-        className="
-            flex 
-            flex-1 
-            cursor-pointer 
-            items-center 
-            space-x-3 
-            rounded-lg border 
-            border-solid
-            transition
-            hover:bg-black/20"
-      >
-        <div className=" rounded-lg ">
-          <Avatar />
+interface OtherUsersProps {
+    users: User[];
+}
+
+const OtherUsers: React.FC<OtherUsersProps> = ({ users }) => {
+        return (
+        <div>
+            {users.map((user) => (
+            <div key={user.email} className="flex items-center space-x-3">
+                <Avatar />
+                <div>
+                <p>{user.firstName} {user.lastName}</p>
+                </div>
+            </div>
+            ))}
         </div>
-        Pseudo
-      </div>
-    </div>
-  );
-};
-export default OtherUsers;
+        );
+    };
+
+    export default OtherUsers;
