@@ -1,16 +1,13 @@
-import { Theme } from "@/layouts/ConnectedLayout";
+import useStore from "@/hooks/useStore";
 import { LuMoon, LuSun } from "react-icons/lu";
 import Switch from "../UI/Switch";
 
-type Props = {
-  navUnfolded: boolean;
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
-};
+const DarkModeSwitch = () => {
+  const { navUnfolded, theme, setTheme } = useStore();
 
-const DarkModeSwitch: React.FC<Props> = ({ navUnfolded, theme, setTheme }) => {
   const handleTheme = () => {
-    setTheme((theme) => (theme === "light" ? "dark" : "light"));
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
   };
 
   if (navUnfolded) {

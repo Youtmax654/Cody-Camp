@@ -1,19 +1,12 @@
-import { Theme } from "@/layouts/ConnectedLayout";
+import useStore from "@/hooks/useStore";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 import { LuLogOut, LuSettings } from "react-icons/lu";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { NavContext } from "./Header";
 
-type Props = {
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
-};
-
-const BottomSidebar: React.FC<Props> = ({ theme, setTheme }) => {
+const BottomSidebar = () => {
+  const { navUnfolded } = useStore();
   const pathName = usePathname();
-  const { navUnfolded } = React.useContext(NavContext);
 
   const handleLogOut = () => {
     document.cookie = "uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -54,11 +47,7 @@ const BottomSidebar: React.FC<Props> = ({ theme, setTheme }) => {
           Déconnexion
         </p>
       </div>
-      <DarkModeSwitch
-        navUnfolded={navUnfolded}
-        theme={theme}
-        setTheme={setTheme}
-      />
+      <DarkModeSwitch />
     </div>
   );
 };

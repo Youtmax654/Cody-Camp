@@ -33,6 +33,17 @@ main.wave {
   }
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 .fc-media-screen {
   width: 100%;
   height: 80%;

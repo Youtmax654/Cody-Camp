@@ -1,3 +1,5 @@
+import useStore from "@/hooks/useStore";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import {
@@ -7,11 +9,9 @@ import {
   LuMegaphone,
   LuMessagesSquare,
 } from "react-icons/lu";
-import { NavContext } from "./Header";
-import Link from "next/link";
 
 const TopSidebar: React.FC = () => {
-  const { navUnfolded } = React.useContext(NavContext);
+  const { navUnfolded } = useStore();
   const pathName = usePathname();
 
   const links = [

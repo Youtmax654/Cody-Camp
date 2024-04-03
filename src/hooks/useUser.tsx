@@ -1,15 +1,7 @@
 import { getCookie, setCookie } from "@/utils/cookies";
+import { User } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
-export type User = {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  secondEmail?: string;
-  password: string;
-  confirmPassword?: string;
-};
 
 export const useUser = () => {
   const router = useRouter();

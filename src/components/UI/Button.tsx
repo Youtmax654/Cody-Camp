@@ -22,10 +22,10 @@ const Button: React.FC<Props> = ({
     <button
       className={`flex flex-row items-center
                 justify-center gap-1
-                rounded-md bg-indianred p-1 
+                rounded-md bg-indianred p-1 px-4
                 text-white shadow-md outline-none 
                 transition-colors duration-150 
-                before:bg-black hover:bg-indianred 
+                hover:bg-indianred 
                 ${className}`}
       disabled={disabled}
       type={type || "button"}

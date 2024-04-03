@@ -1,14 +1,8 @@
-import { User } from "@/hooks/useUser";
+import useStore from "@/hooks/useStore";
 import Image from "next/image";
-import React from "react";
-import { NavContext } from "./Header";
 
-type Props = {
-  user: User | undefined;
-};
-
-const UserInfo: React.FC<Props> = ({ user }) => {
-  const { navUnfolded } = React.useContext(NavContext);
+const UserInfo = () => {
+  const { user, navUnfolded } = useStore();
 
   return (
     <div
@@ -16,8 +10,8 @@ const UserInfo: React.FC<Props> = ({ user }) => {
                     flex flex-row items-center 
                     gap-2 overflow-hidden border-b 
                     border-solid border-black/20 pb-3
-                    pl-2 pt-2 font-bold
-                    transition-colors duration-300 ease-in-out
+                    pl-2 pt-2 font-bold transition-colors
+                    duration-300 ease-in-out dark:border-white/20
                   `}
     >
       <Image

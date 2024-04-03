@@ -2,39 +2,42 @@
 
 import Header from "@/components/Header/Header";
 import Loading from "@/components/Loading";
-import { User } from "@/hooks/useUser";
+import useStore from "@/hooks/useStore";
+import { useUser } from "@/hooks/useUser";
 import { Inter } from "next/font/google";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export type Theme = "light" | "dark";
-
 export default function ConnectedLayout({
   children,
-  user,
-  loading,
-  navUnfolded,
-  setNavUnfolded,
-  theme,
-  setTheme,
 }: Readonly<{
   children: React.ReactNode;
-  user: User | undefined;
-  loading: boolean;
-  navUnfolded: boolean;
-  setNavUnfolded: Dispatch<SetStateAction<boolean>>;
-  theme: Theme;
-  setTheme: Dispatch<SetStateAction<Theme>>;
 }>) {
+  const { user, setUser, theme, layoutLoading, setLayoutLoading } = useStore();
+  const { getUser } = useUser();
+
   useEffect(() => {
     console.log("Connected Layout rendered");
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+    if (user === null) {
+      getUser().then((data) => {
+        if (data) {
+          setUser(data);
+          setLayoutLoading(false);
+        }
+      });
+    } else {
+      setLayoutLoading(false);
+    }
+  }, []);
+
+  if (layoutLoading) {
     return (
       <html lang="fr">
         <body>
@@ -46,14 +49,10 @@ export default function ConnectedLayout({
 
   return (
     <html lang="fr" className={theme}>
-      <body className={`${inter.className} flex flex-row`}>
-        <Header
-          user={user}
-          theme={theme}
-          setTheme={setTheme}
-          navUnfolded={navUnfolded}
-          setNavUnfolded={setNavUnfolded}
-        />
+      <body
+        className={`${inter.className} flex flex-row dark:bg-slate-800 dark:text-white`}
+      >
+        <Header />
         {children}
         <ToastContainer />
       </body>

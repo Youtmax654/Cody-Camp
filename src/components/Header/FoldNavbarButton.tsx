@@ -1,9 +1,9 @@
+import useStore from "@/hooks/useStore";
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { NavContext } from "./Header";
 
 const FoldNavbarButton: React.FC = () => {
-  const { navUnfolded, setNavUnfolded } = React.useContext(NavContext);
+  const { navUnfolded, setNavUnfolded } = useStore();
 
   const handleNavbar = () => {
     setNavUnfolded(!navUnfolded);
