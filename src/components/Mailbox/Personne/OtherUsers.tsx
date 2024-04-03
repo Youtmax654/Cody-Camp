@@ -3,20 +3,16 @@ import Avatar from "./Avatar";
 import { User } from "@/hooks/useUser";
 
 interface OtherUsersProps {
-    users: User[];
+    user: User; 
 }
 
-const OtherUsers: React.FC<OtherUsersProps> = ({ users }) => {
+    const OtherUsers: React.FC<OtherUsersProps> = ({ user }) => {
         return (
-        <div>
-            {users.map((user) => (
-            <div key={user.email} className="flex items-center space-x-3">
-                <Avatar />
-                <div>
-                <p>{user.firstName} {user.lastName}</p>
-                </div>
+        <div className="mr-2 flex flex-1 cursor-pointer items-center space-x-3 rounded-lg border border-solid transition hover:bg-black/20">
+            <Avatar />
+            <div>
+            <p>{user.firstName} {user.lastName}</p>
             </div>
-            ))}
         </div>
         );
     };

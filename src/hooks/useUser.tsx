@@ -121,21 +121,24 @@ export const useUser = () => {
     return;
   };
 
-  const getAllUsers = async ()=> {
-    try {
-      const res = await fetch("/api/user/getOtherUser",{
-        method: "POST"});
-      if (res.ok) {
-        const data: User[] = await res.json();
-        return data;
-      } else {
-        throw new Error("Failed to fetch users"); 
+  const getAllUsers = async () => {
+      const uid = getCookie("uid");
+      console.log("Get UID:", uid);
+      if (uid) {
+        const res = await fetch("/api/user/getOtherUser",{
+          method: "GET",         
+          headers: {
+            uid: uid,
+          }
+        });
+        if (res.status === 201) {
+          const data: User[] = await res.json();
+          return data as User[];
+        } else {
+          throw new Error("Failed to fetch users"); 
+        }
       }
-    } catch (error) {
-      console.error("Error fetching users:", error);
-      throw error;
-    }
-  };
+    };
 
   return { userExist, register, login, getUser, getAllUsers };
 };

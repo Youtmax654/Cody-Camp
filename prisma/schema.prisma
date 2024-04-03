@@ -28,7 +28,6 @@ model users {
   password      String  @db.VarChar(255)
   role          String  @default("étudiant") @db.VarChar(50)
   active        Boolean @default(false)
-  secondEmail String? @db.VarChar(100)
 }
 
 model announcement {
