@@ -15,12 +15,9 @@ const config: Config = {
       backgroundImage: {
         "gradient-pink":
           "linear-gradient(90deg, rgba(198,35,104,1) 0%, rgba(250,114,104,1) 100%)",
-        wave: "background: url(../public/layered-waves-haikei.svg); background-repeat: no-repeat; background-size: cover; background-position: 75% 0;",
       },
       colors: {
         indianred: "#EF5F67",
-        dark: "#222831",
-        tuna: "#31363F",
       },
       boxShadow: {
         md: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",

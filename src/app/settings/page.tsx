@@ -1,38 +1,24 @@
 "use client";
 
-import Loading from "@/components/Loading";
 import ChangePassword from "@/components/Settings/Account/ChangePassword";
 import PersonalInformation from "@/components/Settings/Account/PersonalInformation";
 import Notifications from "@/components/Settings/Notifications/Notifications";
-import { User, useUser } from "@/hooks/useUser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const tabs = ["Compte", "Notifications"] as const;
 type Tab = (typeof tabs)[number];
 
 function Settings() {
   const [activeTab, setActiveTab] = useState<Tab>("Compte");
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<User>({} as User);
-
-  const { getUser } = useUser();
-
-  useEffect(() => {
-    getUser().then((data) => {
-      if (data) {
-        setUser(data);
-        setLoading(false);
-      }
-    });
-  }, []);
+  // const [loading, setLoading] = useState(true);
 
   const TabContent: React.FC = () => {
     switch (activeTab) {
       case "Compte":
         return (
           <>
-            <PersonalInformation user={user} />
-            <ChangePassword user={user} />
+            <PersonalInformation />
+            <ChangePassword />
           </>
         );
       case "Notifications":
@@ -40,17 +26,21 @@ function Settings() {
     }
   };
 
-  if (loading) {
-    return (
-      <main className="flex flex-1 items-center justify-center">
-        <Loading />
-      </main>
-    );
-  }
+  // useEffect(() => {
+  //   if (user) setLoading(false);
+  // }, []);
+
+  // if (loading) {
+  //   return (
+  //     <main className="flex flex-1 items-center justify-center">
+  //       <Loading />
+  //     </main>
+  //   );
+  // }
 
   return (
     <div className="flex flex-1 flex-col">
-      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4">
+      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4 dark:border-white/20">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -63,7 +53,7 @@ function Settings() {
           </button>
         ))}
       </nav>
-      <div className="size-full overflow-y-scroll bg-gray-500/5">
+      <div className="size-full overflow-y-scroll bg-gray-500/5 dark:bg-white/5">
         <TabContent />
       </div>
     </div>

@@ -25,7 +25,7 @@ function Mailbox() {
       case "Messages":
         return (
           <div className="flex flex-1 flex-row">
-            <nav className="flex w-24 flex-col overflow-y-scroll border-r border-solid border-black/20 ">
+            <nav className="no-scrollbar flex w-24 flex-col overflow-y-scroll border-r border-solid border-black/20">
               <ConversationBox />
             </nav>
             <Chat />
