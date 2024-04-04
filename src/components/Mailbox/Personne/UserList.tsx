@@ -18,7 +18,7 @@ function UserList() {
         setLoading(false);
       })
       .catch((error: any) => console.error("Error fetching users:", error));
-  }, []);
+  }, [getAllUsers]);
 
   
   if (loading) {
