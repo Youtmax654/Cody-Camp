@@ -1,4 +1,5 @@
 "use client";
+import Maintenance from "@/components/Maintenance";
 import { useEffect, useState } from "react";
 import { LuBookMarked } from "react-icons/lu";
 
@@ -39,6 +40,8 @@ function Announcement() {
     setCurrentTime(new Date());
   }
 
+  return <Maintenance />;
+
   //affichage
   return (
     <div id="bg-annonce" className="flex size-full flex-col">
@@ -75,7 +78,7 @@ function Announcement() {
       <div className="flex h-screen items-center justify-center">
         <button
           onClick={handleClick}
-          className="text-white-100 w-48 rounded-md border border-solid border-black bg-indianred p-1.5 text-white shadow-md outline-none hover:bg-indianred dark:bg-redwine"
+          className="text-white-100 dark:bg-redwine w-48 rounded-md border border-solid border-black bg-indianred p-1.5 text-white shadow-md outline-none hover:bg-indianred"
         >
           Ajouter Annonce
         </button>
@@ -111,13 +114,13 @@ function Announcement() {
                 className="bg-white-100 rounded-md border border-solid border-indianred p-1.5 active:outline-indianred"
               />
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred dark:bg-redwine"
+                className="text-white-100 dark:bg-redwine rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
                 type="submit"
               >
                 Ajouter
               </button>
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred dark:bg-redwine"
+                className="text-white-100 dark:bg-redwine rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
                 onClick={() => setIsPopupOpen(false)}
               >
                 Annuler

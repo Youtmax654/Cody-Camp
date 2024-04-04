@@ -15,7 +15,7 @@ const UserInfo = () => {
                   `}
     >
       <Image
-        src={"/logo.jpg"}
+        src={user?.profilePicture as string}
         width={35}
         height={35}
         alt="logo"

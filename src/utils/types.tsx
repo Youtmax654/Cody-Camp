@@ -7,6 +7,7 @@ export type User = {
   secondEmail?: string;
   password: string;
   confirmPassword?: string;
+  profilePicture?: string;
 };
 
 export type MailboxTab = "Personnes" | "Messages";

@@ -1,13 +1,16 @@
+import useStore from "@/hooks/useStore";
 import Image from "next/image";
 import ContentMessage from "./ContentMessage";
 import Send from "./Send";
 
 const Chat = () => {
+  const { user } = useStore();
+
   return (
     <div className=" flex flex-1 flex-col overflow-y-scroll">
       <div className="flex flex-row items-center border-b border-solid border-black/20">
         <Image
-          src={"/public/avatar.jpg"}
+          src={user?.profilePicture as string}
           alt="Profile picture"
           width={50}
           height={50}
