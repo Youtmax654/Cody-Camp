@@ -19,10 +19,73 @@ model messages {
 }
 
 model users {
+<<<<<<< Updated upstream
   id        Int    @id @default(autoincrement())
   firstName String @db.Char(50)
   lastName  String @db.Char(50)
   email     String @unique(map: "email") @db.VarChar(100)
   password  String @db.VarChar(255)
   role      String @default("étudiant") @db.VarChar(50)
+=======
+  id          String  @id @db.Char(36)
+  firstName   String  @db.Char(50)
+  lastName    String  @db.Char(50)
+  email       String  @unique @db.VarChar(100)
+  password    String  @db.VarChar(255)
+  role        String  @default("étudiant") @db.VarChar(50)
+  active      Boolean @default(false)
+  secondEmail String? @db.VarChar(100)
+}
+
+model announcement {
+  id       Int       @id @default(autoincrement())
+  senderId String    @db.Char(36)
+  content  String
+  datetime DateTime? @default(now()) @db.Timestamp(0)
+
+  @@index([senderId])
+}
+
+model group_messages {
+  id       Int       @id @default(autoincrement())
+  senderId String    @db.Char(36)
+  groupId  Int
+  content  String
+  datetime DateTime? @default(now()) @db.Timestamp(0)
+
+  @@index([groupId])
+  @@index([senderId])
+}
+
+model groups {
+  id          Int    @id @default(autoincrement())
+  name        String @db.Char(50)
+  description String
+}
+
+model planning {
+  id            Int      @id @default(autoincrement())
+  startDateTime DateTime @db.Timestamp(6)
+  endDateTime   DateTime @db.Timestamp(0)
+  course        String   @db.Char(50)
+  teacher       String   @db.Char(50)
+  room          String   @db.Char(50)
+  classname     String   @db.Char(50)
+}
+
+model user_groups {
+  id      Int    @id @default(autoincrement())
+  userId  String @db.Char(36)
+  groupId Int
+
+  @@index([groupId])
+  @@index([userId])
+}
+
+model authtokens {
+  id     String @id @db.VarChar(255)
+  userId String @db.Char(36)
+
+  @@index([userId])
+>>>>>>> Stashed changes
 }
