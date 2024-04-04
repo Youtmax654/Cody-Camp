@@ -6,13 +6,14 @@ import { User } from "@/utils/types";
 
 function UserList() {
 
-  const [users, setUser] = useState<User[] >({} as User[]); 
+  const [users, setUser] = useState<User[] >([]); 
   const [loading, setLoading] = useState(true);
   const { getAllUsers } = useUser();
 
   useEffect(() => {
     getAllUsers()
       .then((data) => {
+        if(data)
         setUser(data); 
         setLoading(false);
       })
