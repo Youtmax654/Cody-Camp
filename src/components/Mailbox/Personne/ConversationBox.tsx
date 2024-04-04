@@ -1,10 +1,14 @@
+import Link from "next/link";
 import Avatar from "./Avatar";
 
 const ConversationBox = () => {
   return (
-    <div className=" rounded-lg border-b border-black/20 hover:bg-black/20">
-        <Avatar />
-    </div>
+    <Link
+      href={"/mailbox/receiverIdTktCestbon"}
+      className=" rounded-lg border-b border-black/20 hover:bg-black/20"
+    >
+      <Avatar />
+    </Link>
   );
 };
 export default ConversationBox;

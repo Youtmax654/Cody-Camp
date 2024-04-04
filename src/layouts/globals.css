@@ -18,18 +18,29 @@ body {
 }
 
 main.wave {
-  background: url(../public/blurry-gradient-haikei.svg);
+  background: url(../../public/blurry-gradient-haikei.svg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (min-width: 768px) {
   main.wave {
-    background: url(../public/layered-waves-haikei.svg);
+    background: url(../../public/layered-waves-haikei.svg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 75% 0;
     justify-content: end;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

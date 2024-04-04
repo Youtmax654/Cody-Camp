@@ -35,7 +35,8 @@ const Input: React.FC<Props> = ({
                   p-2 shadow-md outline-1 
                   focus:outline-gray-400 
                   disabled:cursor-not-allowed
-                  disabled:bg-gray-200
+                  disabled:bg-gray-200 dark:border-white/20
+                  dark:bg-slate-700 dark:disabled:bg-slate-800
                   ${className}`}
       />
     </label>

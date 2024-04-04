@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { TbDatabaseEdit } from "react-icons/tb";
+import { useEffect, useState } from "react";
 import { LuBookMarked } from "react-icons/lu";
 
 function Announcement() {
@@ -43,9 +41,9 @@ function Announcement() {
 
   //affichage
   return (
-    <div id="bg-annonce" className="flex flex-col w-full h-full">
-      <div className="flex flex-col items-center flex-1 pt-20">
-        <div className="flex flex-col items-center justify-center rounded-md border-2 border-solid border-black p-5 h-full">
+    <div id="bg-annonce" className="flex size-full flex-col">
+      <div className="flex flex-1 flex-col items-center pt-20">
+        <div className="flex h-full flex-col items-center justify-center rounded-md border-2 border-solid border-black p-5">
           <h1 className="text-5xl">Actualité</h1>
           <p>
             date du jour : {currentTime.toLocaleTimeString()}{" "}
@@ -54,18 +52,15 @@ function Announcement() {
         </div>
       </div>
 
-      <div
-        id="annonceNews"
-        className="flex justify-around h-full pr-9 pl-9 pt-48"
-      >
-        <div className="flex flex-wrap flex-col">
+      <div id="annonceNews" className="flex h-full justify-around px-9 pt-48">
+        <div className="flex flex-col flex-wrap">
           <div className="text-3xl text-black/60 ">
             <h1>Récent</h1>
           </div>
-          <div className="lign relative w-full text-start flex flex-row w-full items-center z-10">
+          <div className="lign relative z-10 flex w-full flex-row items-center text-start">
             <LuBookMarked size={40} />
-            <div className="border-violet-700 border-l-2 pl-2">
-              <h1 className="font-bold text-xl">
+            <div className="border-l-2 border-violet-700 pl-2">
+              <h1 className="text-xl font-bold">
                 CP_BACH_DEV WEB SÉCURITÉ 1A TP 23-24 - Base de données - PHP -
                 Cours
               </h1>
@@ -77,10 +72,10 @@ function Announcement() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex h-screen items-center justify-center">
         <button
           onClick={handleClick}
-          className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred text-white w-48"
+          className="text-white-100 w-48 rounded-md border border-solid border-black bg-indianred p-1.5 text-white shadow-md outline-none hover:bg-indianred dark:bg-redwine"
         >
           Ajouter Annonce
         </button>
@@ -116,13 +111,13 @@ function Announcement() {
                 className="bg-white-100 rounded-md border border-solid border-indianred p-1.5 active:outline-indianred"
               />
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred dark:bg-redwine"
                 type="submit"
               >
                 Ajouter
               </button>
               <button
-                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred"
+                className="text-white-100 rounded-md border border-solid border-black bg-indianred p-1.5 shadow-md outline-none hover:bg-indianred dark:bg-redwine"
                 onClick={() => setIsPopupOpen(false)}
               >
                 Annuler

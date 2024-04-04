@@ -2,7 +2,8 @@
 
 import Calendar from "@/components/Home/Calendar";
 import Loading from "@/components/Loading";
-import { User, useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
+import { User } from "@/utils/types";
 import { useEffect, useState } from "react";
 
 function Home() {

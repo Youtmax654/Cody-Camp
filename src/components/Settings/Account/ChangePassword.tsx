@@ -1,9 +1,11 @@
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
-import { User } from "@/hooks/useUser";
+import useStore from "@/hooks/useStore";
 import { toast } from "react-toastify";
 
-const ChangePassword = ({ user }: { user: User }) => {
+const ChangePassword = () => {
+  const { user } = useStore();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {

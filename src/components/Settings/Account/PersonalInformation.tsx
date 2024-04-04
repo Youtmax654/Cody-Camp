@@ -1,10 +1,12 @@
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
-import { User } from "@/hooks/useUser";
+import useStore from "@/hooks/useStore";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-const PersonalInformation = ({ user }: { user: User }) => {
+const PersonalInformation = () => {
+  const { user, setUser } = useStore();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -20,12 +22,13 @@ const PersonalInformation = ({ user }: { user: User }) => {
         console.log("Error while updating user information");
         return;
       } else if (res.status === 201) {
-        console.log("User information updated successfully");
-        toast.success("Vos informations ont été mises à jour", {
-          toastId: "userInformationUpdated",
-          autoClose: 3000,
+        res.json().then((data) => {
+          setUser(data);
+          toast.success("Vos informations ont été mises à jour", {
+            toastId: "userInformationUpdated",
+            autoClose: 3000,
+          });
         });
-        return;
       }
     });
   };
@@ -34,7 +37,7 @@ const PersonalInformation = ({ user }: { user: User }) => {
     <section className="flex flex-row gap-10 border-b border-solid border-black/20 py-10 pl-8">
       <div className="w-1/3">
         <h1 className="text-xl font-bold">Informations personnelles</h1>
-        <p className="text-gray-500">
+        <p className="text-gray-500 dark:text-gray-400">
           Mettez à jour vos informations personnelles.
         </p>
       </div>
@@ -53,25 +56,29 @@ const PersonalInformation = ({ user }: { user: User }) => {
                 className="cursor-pointer rounded-md border 
                           border-solid border-black/20 
                           bg-white p-2 font-bold shadow-md 
-                          transition-colors hover:bg-black/5"
+                          transition-colors hover:bg-black/5
+                          dark:border-white/20 dark:bg-slate-700
+                          "
               >
                 Changer la photo de profil
               </div>
               <input type="file" id="ppInput" className="hidden" />
             </label>
-            <p className="text-sm text-black/50">JPG, GIF or PNG. 1MB max.</p>
+            <p className="text-sm text-black/50 dark:text-white">
+              JPG, GIF or PNG. 1MB max.
+            </p>
           </div>
         </div>
         <div className="flex w-full gap-4">
-          <Input label="Prénom" value={user.firstName} disabled />
-          <Input label="Nom" value={user.lastName} disabled />
+          <Input label="Prénom" value={user?.firstName} disabled />
+          <Input label="Nom" value={user?.lastName} disabled />
         </div>
-        <Input label="Adresse e-mail de l'école" value={user.email} disabled />
+        <Input label="Adresse e-mail de l'école" value={user?.email} disabled />
         <Input
           label="Adresse e-mail secondaire"
           name="secondEmail"
           placeholder={"prenom.nom@email.com"}
-          defaultValue={user.secondEmail}
+          defaultValue={user?.secondEmail}
         />
         <Button type="submit" className="w-fit p-2">
           Valider
