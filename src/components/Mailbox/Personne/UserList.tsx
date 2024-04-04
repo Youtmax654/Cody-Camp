@@ -5,7 +5,7 @@ import Loading from "@/components/Loading";
 
 function UserList() {
 
-  const [users, setUser] = useState<User[]>({} as User[]); 
+  const [users, setUser] = useState<User[] >({} as User[]); 
   const [loading, setLoading] = useState(true);
   const { getAllUsers } = useUser();
 
@@ -27,21 +27,12 @@ function UserList() {
     );
   }
 
-  const groupedUsers: User[][] = [];
-  for (let i = 0; i < users.length; i += 3) {
-    groupedUsers.push(users.slice(i, i + 3));
-  }
-
   return (
-    <div className="flex flex-col items-center justify-center p-3">
-    {groupedUsers.map((group, index) => (
-      <div key={index} className="flex items-center justify-center space-x-3">
-        {group.map((user) => (
-          <OtherUsers key={user.email} user={user} />
-        ))}
-      </div>
-    ))}
-  </div>
+    <div className="flex flex-row items-center justify-center p-3">
+      {users.map((user) => (
+        <OtherUsers key={user.email} user={user}/>
+      ))}
+    </div>
   );
 };
 

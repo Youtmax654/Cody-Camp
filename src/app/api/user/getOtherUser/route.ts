@@ -12,9 +12,7 @@ export async function GET(req: NextRequest, res:NextResponse) {
 
     try {
         if (uid) {
-            const user = await prisma.users.findMany({
-        where: { id: uid }
-        });
+            const user = await prisma.users.findMany();
 
         if (!user) {
             return NextResponse.json("User not found", { status: 404 });

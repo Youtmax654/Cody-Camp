@@ -11,7 +11,7 @@ interface OtherUsersProps {
         <div className="mr-2 flex flex-1 cursor-pointer items-center space-x-3 rounded-lg border border-solid transition hover:bg-black/20">
             <Avatar />
             <div>
-            <p>{user.firstName} {user.lastName}</p>
+                <p>{user.lastName} {user.firstName}</p>
             </div>
         </div>
         );

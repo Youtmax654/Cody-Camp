@@ -133,7 +133,7 @@ export const useUser = () => {
         });
         if (res.status === 201) {
           const data: User[] = await res.json();
-          return data as User[];
+          return data;
         } else {
           throw new Error("Failed to fetch users"); 
         }
