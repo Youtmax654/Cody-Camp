@@ -1,5 +1,6 @@
 import { MdOutlineAddAPhoto } from "react-icons/md";
-import Button from "../../UI/Button";
+import Button from "@/components/UI/Button";
+import Input from "@/components/UI/Input";
 
 const Send = () => {
   return (
@@ -10,16 +11,7 @@ const Send = () => {
           size={30}
         />
       </div>
-      <input
-        type="text"
-        className="flex flex-1 
-                rounded-md border
-                border-solid 
-                border-gray-300 bg-white p-2 
-                shadow-md 
-                outline-1
-                focus:outline-gray-400 disabled:cursor-not-allowed disabled:bg-gray-200"
-      />
+      <Input />
       <Button className="p-2">Envoyer</Button>
     </div>
   );

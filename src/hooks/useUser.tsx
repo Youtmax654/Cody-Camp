@@ -120,7 +120,7 @@ export const useUser = () => {
         const res = await fetch("/api/user/getOtherUser",{
           method: "GET",         
           headers: {
-            uid: uid,
+            uid: uid
           }
         });
         if (res.status === 201) {

@@ -1,6 +1,9 @@
 import ContentMessage from "@/components/Mailbox/Message/ContentMessage";
 import Send from "@/components/Mailbox/Message/Send";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useUser } from "@/hooks/useUser"; 
+import { User } from "@/utils/types";
 
 const Discussion = ({ params }: { params: { receiverId: string } }) => {
   const receiverId = params.receiverId;

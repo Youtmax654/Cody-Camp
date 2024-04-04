@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import OtherUsers from "./OtherUsers";
-import { User, useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 import Loading from "@/components/Loading";
+import { User } from "@/utils/types";
 
 function UserList() {
 

@@ -1,17 +1,9 @@
-import cluster from "cluster";
-import PusherServer from "pusher";
-import PusherClient from "pusher-js";
+import Pusher from "pusher";
 
-export const pusherServer = new PusherServer({
+export const pusher = new Pusher({
     appId: process.env.app_id!,
     key: process.env.key!,
     secret: process.env.secret!,
-    cluster: 'eu',
+    cluster: process.env.cluster!,
     useTLS: true,
 });
-
-export const pusherClient = new PusherClient(
-    process.env.app_id!,{
-        cluster:'eu'
-    }
-);

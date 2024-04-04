@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "./Avatar";
-import { User } from "@/hooks/useUser";
+import { User } from "@/utils/types";
 
 interface OtherUsersProps {
     user: User; 

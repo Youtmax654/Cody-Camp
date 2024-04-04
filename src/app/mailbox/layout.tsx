@@ -1,6 +1,6 @@
 "use client";
 
-import ConversationBox from "@/components/Mailbox/Personne/ConversationBox";
+import ConversationBox from "@/components/Mailbox/Message/ConversationBox";
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
 import useStore from "@/hooks/useStore";

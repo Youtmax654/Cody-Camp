@@ -3,8 +3,8 @@ import React from "react";
 
 const Avatar = () => {
   return (
-    <div className="relative size-20 rounded-full ">
-      <Image src={"/avatar.jpg"} alt="Profile picture" width={90} height={90} />
+    <div className="flex size-16 items-center rounded-full  ">
+      <Image src={"/avatar.jpg"} alt="Profile picture" className="rounded-full" width={70} height={70} />
     </div>
   );
 };
