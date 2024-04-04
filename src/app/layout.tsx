@@ -22,10 +22,6 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  // useEffect(() => {
-
-  // })
-
   const LayoutSelector = () => {
     if (pathname === "/" || pathname.startsWith("/confirmEmail")) {
       return <DisconnectedLayout>{children}</DisconnectedLayout>;

@@ -1,15 +1,17 @@
 import ContentMessage from "@/components/Mailbox/Message/ContentMessage";
 import Send from "@/components/Mailbox/Message/Send";
+import useStore from "@/hooks/useStore";
 import Image from "next/image";
 
 const Discussion = ({ params }: { params: { receiverId: string } }) => {
+  const { user } = useStore();
   const receiverId = params.receiverId;
 
   return (
     <div className=" flex flex-1 flex-col overflow-y-scroll">
       <div className="flex flex-row items-center border-b border-solid border-black/20">
         <Image
-          src={"/public/avatar.jpg"}
+          src={user?.profilePicture as string}
           alt="Profile picture"
           width={50}
           height={50}

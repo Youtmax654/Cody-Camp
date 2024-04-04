@@ -105,12 +105,13 @@ export const useUser = () => {
       if (res.status === 201) {
         const data = await res.json();
         return data as User;
-      }
-      if (res.status === 404) {
-        return;
+      } else if (res.status === 404) {
+        return null;
+      } else if (res.status === 400) {
+        return null;
       }
     }
-    return;
+    return null;
   };
 
   return { userExist, register, login, getUser };

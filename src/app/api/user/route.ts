@@ -22,8 +22,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
           lastName: true,
           email: true,
           secondEmail: true,
+          password: true,
           role: true,
           active: true,
+          profilePicture: true,
         },
       });
 
@@ -40,9 +42,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
           firstName: true,
           lastName: true,
           email: true,
+          secondEmail: true,
           password: true,
           role: true,
           active: true,
+          profilePicture: true,
         },
       });
 
@@ -66,14 +70,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     const uid = body.user.id;
     const secondEmail = body.secondEmail;
-
-    console.log("body: ", body);
-    console.log("uid: ", uid);
-    console.log("secondEmail: ", secondEmail);
+    const profilePicture = body.profilePicURL;
 
     const user = await prisma.users.update({
       where: { id: uid },
-      data: { secondEmail: secondEmail },
+      data: { secondEmail: secondEmail, profilePicture: profilePicture.url },
     });
 
     if (!user) {

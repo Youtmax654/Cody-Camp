@@ -5,8 +5,9 @@ import Loading from "@/components/Loading";
 import useStore from "@/hooks/useStore";
 import { useUser } from "@/hooks/useUser";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function ConnectedLayout({
 }>) {
   const { user, setUser, theme, layoutLoading, setLayoutLoading } = useStore();
   const { getUser } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     console.log("Connected Layout rendered");
@@ -27,7 +29,15 @@ export default function ConnectedLayout({
   useEffect(() => {
     if (user === null) {
       getUser().then((data) => {
-        if (data) {
+        if (data === null) {
+          console.log("User not logged in");
+          router.push("/");
+          toast.error("Veuillez vous connecter pour accéder à cette page", {
+            toastId: "notLoggedIn",
+            autoClose: 3000,
+          });
+        } else if (data) {
+          console.log("User logged in", data);
           setUser(data);
           setLayoutLoading(false);
         }

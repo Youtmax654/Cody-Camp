@@ -1,10 +1,13 @@
+import useStore from "@/hooks/useStore";
 import Image from "next/image";
 
 const ContentMessage = () => {
+  const { user } = useStore();
+
   return (
     <div className="flex h-full flex-row items-end ">
       <Image
-        src={"/public/avatar.jpg"}
+        src={user?.profilePicture as string}
         alt="Profile picture"
         width={50}
         height={50}
