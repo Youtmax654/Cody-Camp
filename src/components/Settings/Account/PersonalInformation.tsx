@@ -5,7 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 const PersonalInformation = () => {
-  const { user } = useStore();
+  const { user, setUser } = useStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,12 +22,13 @@ const PersonalInformation = () => {
         console.log("Error while updating user information");
         return;
       } else if (res.status === 201) {
-        console.log("User information updated successfully");
-        toast.success("Vos informations ont été mises à jour", {
-          toastId: "userInformationUpdated",
-          autoClose: 3000,
+        res.json().then((data) => {
+          setUser(data);
+          toast.success("Vos informations ont été mises à jour", {
+            toastId: "userInformationUpdated",
+            autoClose: 3000,
+          });
         });
-        return;
       }
     });
   };

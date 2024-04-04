@@ -1,4 +1,4 @@
-import { Theme, User } from "@/utils/types";
+import { MailboxTab, Theme, User } from "@/utils/types";
 import { StoreApi, UseBoundStore, create } from "zustand";
 
 type State = {
@@ -10,6 +10,8 @@ type State = {
   setNavUnfolded: (navUnfolded: boolean) => void;
   layoutLoading: boolean;
   setLayoutLoading: (layoutLoading: boolean) => void;
+  mailboxActiveTab: MailboxTab;
+  setMailboxActiveTab: (mailboxActiveTab: MailboxTab) => void;
 };
 
 const getCurrentTheme = () => {
@@ -28,6 +30,9 @@ const useStore: UseBoundStore<StoreApi<State>> = create((set) => {
     setNavUnfolded: (navUnfolded: boolean) => set({ navUnfolded }),
     layoutLoading: true,
     setLayoutLoading: (layoutLoading: boolean) => set({ layoutLoading }),
+    mailboxActiveTab: "Personnes",
+    setMailboxActiveTab: (mailboxActiveTab: MailboxTab) =>
+      set({ mailboxActiveTab }),
   };
 });
 

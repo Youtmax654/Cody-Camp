@@ -8,3 +8,5 @@ export type User = {
   password: string;
   confirmPassword?: string;
 };
+
+export type MailboxTab = "Personnes" | "Messages";
