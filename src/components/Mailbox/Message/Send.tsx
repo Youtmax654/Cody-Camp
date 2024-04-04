@@ -1,23 +1,51 @@
-import { useState } from 'react'; // Importez useState si vous n'avez pas déjà fait
+"use client";
 
+import { useState, useEffect } from 'react';
 import { MdOutlineAddAPhoto } from "react-icons/md";
-import Button from "@/components/UI/Button";
-import Input from "@/components/UI/Input";
+import Button from "../../UI/Button";
 import { postData } from "@/app/api/message/action";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const Send = () => {
-  const [message, setMessage] = useState(''); // État pour stocker le contenu du message
+  const [message, setMessage] = useState('');
+  const [senderId, setSenderId] = useState(''); // État pour stocker l'ID de l'expéditeur
+  const [receiverId, setReceiverId] = useState(''); // État pour stocker l'ID du destinataire
 
-  const handleSubmit = async (event: { preventDefault: () => void; target: HTMLFormElement | undefined; }) => {
-    event.preventDefault(); // Empêche la soumission du formulaire par défaut
+  // Fonction pour charger les ID de l'expéditeur et du destinataire depuis la base de données
+  const loadUserIds = async () => {
+    try {
+      // Supposons que l'utilisateur actuellement connecté est l'expéditeur
+      const sender = await prisma.users.findFirst({ where: {id: senderId}});
+      if (sender) {
+        setSenderId(sender.id);
+      }
+
+      // Supposons que le destinataire est sélectionné à partir d'une liste d'utilisateurs
+      const receiver = await prisma.users.findFirst({ where: {id: receiverId}});
+      if (receiver) {
+        setReceiverId(receiver.id);
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors du chargement des ID des utilisateurs :', error);
+    }
+  };
+
+  // Appeler la fonction pour charger les ID de l'expéditeur et du destinataire dès que le composant est monté
+  useEffect(() => {
+    loadUserIds();
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     try {
-      await postData(new FormData(event.target)); // Appeler postData avec les données du formulaire
-      // Réinitialiser le contenu du message après l'envoi réussi
+      const formData = new FormData(event.currentTarget as HTMLFormElement);
+      await postData(formData, senderId, receiverId); // Passer senderId et receiverId à la fonction postData
       setMessage('');
     } catch (error) {
       console.error('Une erreur s\'est produite lors de l\'envoi du message :', error);
-      // Gérer l'erreur de manière appropriée, par exemple afficher un message d'erreur à l'utilisateur
     }
   };
 
@@ -29,12 +57,21 @@ const Send = () => {
           size={30}
         />
       </div>
-      <Input
+      <input
+        type="text"
         value={message}
-        onChange={(e) => setMessage(e.target.value)} // Mettre à jour le contenu du message lorsque l'utilisateur tape
+        onChange={(e) => setMessage(e.target.value)}
+        className="flex flex-1 
+                rounded-md border
+                border-solid 
+                border-gray-300 bg-white p-2 
+                shadow-md 
+                outline-1
+                focus:outline-gray-400 disabled:cursor-not-allowed disabled:bg-gray-200"
       />
       <Button type="submit" className="p-2">Envoyer</Button>
     </form>
   );
 };
+
 export default Send;

@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
 };
 experimental:{
-  serverAction = true;
+  serverAction: true;
 }
 
 export default nextConfig;
