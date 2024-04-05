@@ -14,6 +14,8 @@ type State = {
   setMailboxActiveTab: (mailboxActiveTab: MailboxTab) => void;
   connected: boolean;
   setConnected: (connected: boolean) => void;
+  users: User[];
+  setUsers: (users: User[]) => void;
 };
 
 const getCurrentTheme = () => {
@@ -37,6 +39,8 @@ const useStore: UseBoundStore<StoreApi<State>> = create((set) => {
       set({ mailboxActiveTab }),
     connected: false,
     setConnected: (connected: boolean) => set({ connected }),
+    users: [],
+    setUsers: (users: User[]) => set({ users }),
   };
 });
 

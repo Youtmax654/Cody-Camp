@@ -18,8 +18,9 @@ export default function ConnectedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user, setUser, theme, layoutLoading, setLayoutLoading } = useStore();
-  const { getUser } = useUser();
+  const { user, setUser, theme, layoutLoading, setLayoutLoading, setUsers } =
+    useStore();
+  const { getUser, getUsers } = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -39,12 +40,14 @@ export default function ConnectedLayout({
         } else if (data) {
           console.log("User logged in", data);
           setUser(data);
-          setLayoutLoading(false);
         }
       });
-    } else {
-      setLayoutLoading(false);
     }
+
+    getUsers().then((data) => {
+      setUsers(data);
+      setLayoutLoading(false);
+    });
   }, []);
 
   if (layoutLoading) {

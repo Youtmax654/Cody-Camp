@@ -13,7 +13,6 @@ function Mailbox() {
         return (
           <div className="flex flex-1 flex-col">
             <UserList />
-            <UserList />
           </div>
         );
       case "Messages":

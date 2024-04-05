@@ -1,6 +1,5 @@
 "use client";
 
-import ConversationBox from "@/components/Mailbox/Personne/ConversationBox";
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
 import useStore from "@/hooks/useStore";
@@ -27,7 +26,7 @@ export default function MailboxLayout({
 
   return (
     <div className="flex flex-1 flex-col">
-      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4">
+      <nav className="flex list-none flex-row gap-2 border-b border-solid border-black/20 pl-4 dark:border-white/20">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -46,16 +45,7 @@ export default function MailboxLayout({
           </div>
         </>
       </nav>
-      {mailboxActiveTab === "Messages" ? (
-        <div className="flex flex-1 flex-row">
-          <nav className="no-scrollbar flex w-24 flex-col overflow-y-scroll border-r border-solid border-black/20">
-            <ConversationBox />
-          </nav>
-          {children}
-        </div>
-      ) : (
-        children
-      )}
+      {children}
     </div>
   );
 }

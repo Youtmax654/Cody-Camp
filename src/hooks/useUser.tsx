@@ -114,5 +114,21 @@ export const useUser = () => {
     return null;
   };
 
-  return { userExist, register, login, getUser };
+  const getUsers = async (): Promise<User[]> => {
+    return await fetch("/api/users", {
+      method: "GET",
+      headers: {
+        uid: getCookie("uid") || "",
+      },
+    }).then((res) => {
+      if (res.status === 201) {
+        return res.json();
+      } else if (res.status === 404) {
+        console.error("User not found");
+        return;
+      }
+    });
+  };
+
+  return { userExist, register, login, getUser, getUsers };
 };
