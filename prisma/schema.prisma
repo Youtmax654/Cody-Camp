@@ -3,16 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model messages {
   id         Int       @id @default(autoincrement())
   senderId   String    @db.Char(36)
   receiverId String    @db.Char(36)
-  content    String    @db.Text
+  content    String
   datetime   DateTime? @default(now()) @db.Timestamp(0)
 
   @@index([receiverId], map: "receiverId_FK")
@@ -20,20 +20,21 @@ model messages {
 }
 
 model users {
-  id          String  @id @db.Char(36)
-  firstName   String  @db.Char(50)
-  lastName    String  @db.Char(50)
-  email       String  @unique @db.VarChar(100)
-  secondEmail String? @db.VarChar(100)
-  password    String  @db.VarChar(255)
-  role        String  @default("étudiant") @db.VarChar(50)
-  active      Boolean @default(false)
+  id             String  @id @db.Char(36)
+  firstName      String  @db.Char(50)
+  lastName       String  @db.Char(50)
+  email          String  @unique @db.VarChar(100)
+  password       String  @db.VarChar(255)
+  role           String  @default("étudiant") @db.VarChar(50)
+  active         Boolean @default(false)
+  secondEmail    String? @db.VarChar(100)
+  profilePicture String  @default("https://vucgimoret2x9qvf.public.blob.vercel-storage.com/DefaultProfilePic") @db.VarChar(255)
 }
 
 model announcement {
   id       Int       @id @default(autoincrement())
   senderId String    @db.Char(36)
-  content  String    @db.Text
+  content  String
   datetime DateTime? @default(now()) @db.Timestamp(0)
 
   @@index([senderId])
@@ -43,7 +44,7 @@ model group_messages {
   id       Int       @id @default(autoincrement())
   senderId String    @db.Char(36)
   groupId  Int
-  content  String    @db.Text
+  content  String
   datetime DateTime? @default(now()) @db.Timestamp(0)
 
   @@index([groupId])
@@ -53,18 +54,17 @@ model group_messages {
 model groups {
   id          Int    @id @default(autoincrement())
   name        String @db.Char(50)
-  description String @db.Text
+  description String
 }
 
 model planning {
-  id        Int      @id @default(autoincrement())
-  date      DateTime @db.Date
-  startTime DateTime @db.Timestamp(0)
-  endTime   DateTime @db.Timestamp(0)
-  course    String   @db.Char(50)
-  teacher   String   @db.Char(50)
-  room      String   @db.Char(50)
-  class     String   @db.Char(50)
+  id            Int      @id @default(autoincrement())
+  startDateTime DateTime @db.Timestamp(6)
+  endDateTime   DateTime @db.Timestamp(0)
+  course        String   @db.Char(50)
+  teacher       String   @db.Char(50)
+  room          String   @db.Char(50)
+  classname     String   @db.Char(50)
 }
 
 model user_groups {

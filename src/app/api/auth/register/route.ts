@@ -8,7 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  console.log("Création de l'utilisateur");
   try {
     const body = await req.json();
 

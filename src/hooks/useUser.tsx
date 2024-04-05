@@ -1,23 +1,17 @@
 import { getCookie, setCookie } from "@/utils/cookies";
+import { User } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
-export type User = {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  secondEmail?: string;
-  password: string;
-  confirmPassword?: string;
-};
 
 export const useUser = () => {
   const router = useRouter();
 
   const userExist = async (email: string) => {
-    const res = await fetch("/api/user/getUserWithEmail", {
-      method: "POST",
-      body: JSON.stringify({ email: email }),
+    const res = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        email: email,
+      },
     });
     if (res.status === 201) {
       const data = await res.json();
@@ -34,7 +28,7 @@ export const useUser = () => {
     const lN = email.split(".")[1].split("@")[0];
     const lastName = lN.charAt(0).toUpperCase() + lN.slice(1);
 
-    const user = { firstName, lastName, email, password, confirmPassword };
+    const user = { firstName, lastName, email, password };
 
     if (password !== confirmPassword) {
       toast.error("Les mots de passe ne correspondent pas", {
@@ -102,20 +96,39 @@ export const useUser = () => {
     const uid = getCookie("uid");
     console.log("Get UID:", uid);
     if (uid) {
-      const res = await fetch("/api/user/getUserWithId", {
-        method: "POST",
-        body: JSON.stringify({ uid: uid }),
+      const res = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          uid: uid,
+        },
       });
       if (res.status === 201) {
         const data = await res.json();
         return data as User;
-      }
-      if (res.status === 404) {
-        return;
+      } else if (res.status === 404) {
+        return null;
+      } else if (res.status === 400) {
+        return null;
       }
     }
-    return;
+    return null;
   };
 
-  return { userExist, register, login, getUser };
+  const getUsers = async (): Promise<User[]> => {
+    return await fetch("/api/users", {
+      method: "GET",
+      headers: {
+        uid: getCookie("uid") || "",
+      },
+    }).then((res) => {
+      if (res.status === 201) {
+        return res.json();
+      } else if (res.status === 404) {
+        console.error("User not found");
+        return;
+      }
+    });
+  };
+
+  return { userExist, register, login, getUser, getUsers };
 };
